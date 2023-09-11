@@ -4,6 +4,6 @@ export const loginAuth = (username: string, password: string) => {
         return "AdminPanel"
     }
     else {
-        return "UserPanel"
+        return "UsersPanel"
     }
 }

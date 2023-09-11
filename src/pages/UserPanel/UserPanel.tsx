@@ -1,45 +1,64 @@
-import { Input, Divider, Row, Card, Space, Col } from 'antd';
+import { Input, Divider, Row, Card, Space, Col, Button } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import { API } from '../../modules/API'
 import defaultBG from '../../assets/img/default.png';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './UserPanel.scss';
+import {
+  BrowserRouter as Router,
+  Route,
+  useParams,
+} from "react-router-dom"
+
 
 const { Meta } = Card;
 
+
 export const UserPanel: React.FC = () => {
 
-  const [search, setSearch] = useState('');
-  const searchSurname = (e: any) => {
-    setSearch(e.target.value.toLowerCase())
-  }
 
   const userData = API()
 
 
+  let { id } = useParams();
+  console.log(id)
+
+
   return <>
-    <Divider orientation='left'><h1>Interviews Report</h1></Divider>
     <Row justify="center" >
-      <Col span={4}><h1>Candidates</h1></Col>
+      <Col span={6}><h1>Interviews Report</h1></Col>
       <Col span={4}></Col>
       <Col span={4}></Col>
-      <Input onChange={searchSurname} className="searchInput" addonBefore={<SearchOutlined />} placeholder="Search" />
+      <Button className="Button" href="/UsersPanel">Candidates</Button>
     </Row>
     <Divider></Divider>
-    <Row gutter={[16, 24]}>
-    {userData.props.children.map((ele: any) => (
-  ele.surname.toLowerCase().startsWith(search) ? (
-    <Card className="usersCard"
-      key={ele.id}
-      hoverable
-      cover={<img src={defaultBG} />}
-    >
-      <Meta title={ele.surname} description={ele.email} />
-    </Card>
-  ) : null
-))}
 
-    </Row>
+    {userData.props.children.map((ele: any) => (
+      ele.id == id ? (
+
+
+        <>
+          <Row>
+            <Col span={4}>{<img src={defaultBG} className='bgimg' />}</Col>
+            <Col span={10}>{ele.surname}</Col>
+            <Col span={4}>{ele.age}</Col>
+          </Row>
+          <Row>
+            <Col span={4}></Col>
+            <Col span={10}>{ele.email}</Col>
+            <Col span={4}>{ele.name}</Col>
+          </Row>
+
+
+
+
+
+        </>
+
+
+
+      ) : null
+    ))}
   </>
 }
 
