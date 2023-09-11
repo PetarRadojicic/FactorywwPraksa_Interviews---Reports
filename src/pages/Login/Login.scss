@@ -1,0 +1,32 @@
+.Filler-Row {
+  height: 40vh;
+  background-color: rgba(0.2, 0.2, 0.2, 0.9);
+}
+
+.Content-Row {
+  height: 20vh;
+}
+
+.Row-Input {
+  width: 100%;
+  background-color: rgba(0.2, 0.2, 0.2, 0.8);
+}
+
+.Row-Input-Username {
+  padding-top: 2vh;
+}
+
+.Row-BUtton {
+  width: 100%;
+}
+
+.ant-form-item .ant-form-item-label>label {
+  color: white;
+  font-size: larger;
+}
+
+.Submit{
+  height: 25%;
+  font-size: x-large;
+  background-color:#333
+}
