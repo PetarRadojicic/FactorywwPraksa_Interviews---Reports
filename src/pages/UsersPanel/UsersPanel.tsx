@@ -18,9 +18,9 @@ export const UsersPanel: React.FC = () => {
   }
 
   const userData = API()
-  return <>
-    <Divider orientation='left'><h1>Interviews Report</h1></Divider>
-    <Row justify="center" >
+  return <div className='fullWrapper-UsersPanel'>
+    <Divider orientation='center' className="Divider-UsersPanel"><h1>Interviews Report</h1></Divider>
+    <Row justify="start" >
       <Col span={4}><h1>Candidates</h1></Col>
       <Col span={4}></Col>
       <Col span={4}></Col>
@@ -30,7 +30,7 @@ export const UsersPanel: React.FC = () => {
     <Row gutter={[16, 24]}>
       {userData.props.children.map((ele: any) => (
         ele.surname.toLowerCase().startsWith(search) ? (
-          <Card onClick={() => {
+          <Card key={ele.id} onClick={() => {
 
             const redirect = `/UserPanel/${ele.id}`
 
@@ -47,5 +47,5 @@ export const UsersPanel: React.FC = () => {
       ))}
 
     </Row>
-  </>
+  </div>
 }
