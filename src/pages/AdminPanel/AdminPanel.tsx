@@ -1,6 +1,6 @@
-import { Input, Divider, Row, Card, Space, Col, List, Button, Modal,Radio } from 'antd';
+import { Input, Divider, Row, Card, Space, Col, List, Button, Modal, Radio } from 'antd';
 import Icon, { HomeOutlined } from '@ant-design/icons';
-import { EyeOutlined,SearchOutlined,CloseOutlined } from '@ant-design/icons';
+import { EyeOutlined, SearchOutlined, CloseOutlined } from '@ant-design/icons';
 import { API } from '../../modules/API'
 import defaultBG from '../../assets/img/default.png';
 import { useState } from 'react';
@@ -13,7 +13,7 @@ export const AdminPanel: React.FC = () => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [showModal, setShowModal] = useState(<></>);
-    const [mode, setmode] = useState('view');
+    let [mode, setmode] = useState('Reports');
 
     // const showModal = () => {
     //     setIsModalOpen(true);
@@ -36,13 +36,13 @@ export const AdminPanel: React.FC = () => {
     }
 
     const userData = API()
-    return <div className='fullWrapper-UsersPanel'>
+    return mode == 'Reports' ? <div className='fullWrapper-UsersPanel'>
         {isModalOpen ? showModal : null}
         <Divider orientation='center' className="Divider-UsersPanel"><h1>Reports Administration</h1>
-        <Radio.Group value={mode} onChange={(e) => console.log(e.target.value)}>
-        <Radio.Button value="large">Reports</Radio.Button>
-        <Radio.Button value="small">Create Report</Radio.Button>
-      </Radio.Group>
+            <Radio.Group value={mode} onChange={(e) => setmode(e.target.value)}>
+                <Radio.Button value={'Reports'}>Reports</Radio.Button>
+                <Radio.Button value={'Create Report'}>Create Report</Radio.Button>
+            </Radio.Group>
         </Divider>
         <Input onChange={searchSurname} className="searchInput-AdminPanel" addonBefore={<SearchOutlined />} placeholder="Search" />
         <Divider></Divider>
@@ -54,13 +54,27 @@ export const AdminPanel: React.FC = () => {
                     <Col span={4}>{ele.age}</Col>
                     <Col span={4}>{Passed ? <>Passed</> : <>Declined</>}</Col>
                     <Col span={4} className="Admin-Button-Wrapper"><Button onClick={() => {
-                   {isModalOpen ? setIsModalOpen(false) : setIsModalOpen(true)}
-                    setShowModal(<UserModal surname={ele.surname} name={ele.name} age={ele.age}/>)
+                        { isModalOpen ? setIsModalOpen(false) : setIsModalOpen(true) }
+                        setShowModal(<UserModal surname={ele.surname} name={ele.name} age={ele.age} />)
                     }}><EyeOutlined /></Button><Button><CloseOutlined /></Button></Col>
                 </Row>
             ) : null
         ))}
-    </div>
+    </div> : <div className='fullWrapper-UsersPanel'><Divider orientation='center' className="Divider-UsersPanel"><h1>Reports Administration</h1>
+        <Radio.Group value={mode} onChange={(e) => setmode(e.target.value)}>
+            <Radio.Button value={'Reports'}>Reports</Radio.Button>
+            <Radio.Button value={'Create Report'}>Create Report</Radio.Button>
+        </Radio.Group>
+    </Divider> <div className='Admin-panel-report-wrapper'>{userData.props.children.map((ele: any) => (
+        ele.surname.toLowerCase().startsWith(search) ? (
+          <Card key={ele.id} className="Admin-usersCard"
+            hoverable
+            cover={<img src={defaultBG}  className='Admin-img'/>}
+          >
+            <Meta title={ele.surname} description={ele.email} />
+          </Card>
+        ) : null
+      ))}</div></div>
 }
 
 

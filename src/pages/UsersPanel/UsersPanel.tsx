@@ -39,7 +39,7 @@ export const UsersPanel: React.FC = () => {
 
           }} className="usersCard"
             hoverable
-            cover={<img src={defaultBG} />}
+            cover={<img src={defaultBG}/>}
           >
             <Meta title={ele.surname} description={ele.email} />
           </Card>
