@@ -1,7 +1,6 @@
-import { Input, Divider, Row, Card, Space, Col, Button, Table, Tag } from 'antd';
-import { SearchOutlined } from '@ant-design/icons';
+import { Input, Divider, Row, Card, Space, Col, List, Button, Modal, Radio } from 'antd';
+import { EyeOutlined, SearchOutlined, CloseOutlined } from '@ant-design/icons';
 import { API } from '../../modules/API'
-import defaultBG from '../../assets/img/default.png';
 import { useState } from 'react';
 import './UserPanel.scss';
 import {
@@ -9,10 +8,7 @@ import {
   Route,
   useParams,
 } from "react-router-dom"
-
-
-const { Meta } = Card;
-const { Column, ColumnGroup } = Table;
+import { UserModal } from '../UserModal/UserModal'
 
 interface DataType {
   key: React.Key;
@@ -25,17 +21,17 @@ interface DataType {
 
 export const UserPanel: React.FC = () => {
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showModal, setShowModal] = useState(<></>);
 
-  const data: [] = []
-
-  const userData = API()
-
+  const userDataReports = API('reports')
+  const userDataCandidates = API('candidates')
 
   let { id } = useParams();
-  console.log(id)
 
 
   return <div className="fullWrapper">
+    {isModalOpen ? showModal : null}
     <Row justify="center" >
       <Col span={6}><h1>Interviews Report</h1></Col>
       <Col span={4}></Col>
@@ -44,33 +40,43 @@ export const UserPanel: React.FC = () => {
     </Row>
     <Divider></Divider>
 
-    {userData.props.children.map((ele: any) => (
+    {userDataCandidates.props.children.map((ele: any) => (
       ele.id == id ? (
-
         <>
-
           <div className='userCardContainer' key={ele.id}>
             <Row>
-              <Col span={4}>{<img src={defaultBG} className='bgimg' />}</Col>
-              <Col span={10}>{ele.surname}</Col>
-              <Col span={4}>{ele.age}</Col>
+              <Col span={4}>{<img src={ele.avatar} className='bgimg' />}</Col>
+              <Col span={10}>{ele.name}</Col>
+              <Col span={4}>{ele.birthday}</Col>
             </Row>
             <Row>
               <Col span={4}></Col>
               <Col span={10}>{ele.email}</Col>
-              <Col span={4}>{ele.name}</Col>
+              <Col span={4}>{ele.education}</Col>
             </Row>
           </div>
-
-          <Table dataSource={data} className='Table'>
-          <ColumnGroup title="Company">
-            </ColumnGroup>
-            <ColumnGroup title="Interview Data">
-            </ColumnGroup>
-            <ColumnGroup title="Status">
-            </ColumnGroup>
-          </Table>
         </>
+      ) : null
+    ))}
+    <Divider orientation='left'>Reports</Divider>
+    {userDataReports.props.children.map((ele: any) => (
+      ele.candidateId == id ? (
+        <div className="UserPanelWrraper" key={ele.id}>
+          <Row>
+            <Col span={8} className="">Company</Col>
+            <Col span={8} className="">Interview Date</Col>
+            <Col span={8} className="">Status</Col>
+          </Row>
+          <Row>
+            <Col span={6} className="">{ele.companyName}</Col>
+            <Col span={6} className="">{ele.interviewDate}</Col>
+            <Col span={6} className="">{ele.status}</Col>
+            <Col span={6} className=""><Button onClick={() => {
+              { isModalOpen ? setIsModalOpen(false) : setIsModalOpen(true) }
+              setShowModal(<UserModal companyName={ele.companyName} interviewDate={ele.interviewDate} phase={ele.phase} status={ele.status}/>)
+            }}><EyeOutlined /></Button></Col>
+          </Row>
+        </div>
       ) : null
     ))}
   </div>

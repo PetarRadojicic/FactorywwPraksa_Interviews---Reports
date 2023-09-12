@@ -35,7 +35,7 @@ export const AdminPanel: React.FC = () => {
         setSearch(e.target.value.toLowerCase())
     }
 
-    const userData = API()
+    const userData = API('users')
     return mode == 'Reports' ? <div className='fullWrapper-UsersPanel'>
         {isModalOpen ? showModal : null}
         <Divider orientation='center' className="Divider-UsersPanel"><h1>Reports Administration</h1>
@@ -55,7 +55,7 @@ export const AdminPanel: React.FC = () => {
                     <Col span={4}>{Passed ? <>Passed</> : <>Declined</>}</Col>
                     <Col span={4} className="Admin-Button-Wrapper"><Button onClick={() => {
                         { isModalOpen ? setIsModalOpen(false) : setIsModalOpen(true) }
-                        setShowModal(<UserModal surname={ele.surname} name={ele.name} age={ele.age} />)
+                        // setShowModal(<UserModal/>)
                     }}><EyeOutlined /></Button><Button><CloseOutlined /></Button></Col>
                 </Row>
             ) : null

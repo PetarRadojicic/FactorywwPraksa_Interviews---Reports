@@ -1,10 +1,11 @@
 import { Input, Divider, Row, Card, Space, Col } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
-import { API } from '../../modules/API'
-import defaultBG from '../../assets/img/default.png';
+import { API } from '../../modules/API';
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import './UsersPanel.scss';
+
+
 
 const { Meta } = Card;
 
@@ -17,7 +18,7 @@ export const UsersPanel: React.FC = () => {
     setSearch(e.target.value.toLowerCase())
   }
 
-  const userData = API()
+  const userData = API('candidates')
   return <div className='fullWrapper-UsersPanel'>
     <Divider orientation='center' className="Divider-UsersPanel"><h1>Interviews Report</h1></Divider>
     <Row justify="start" >
@@ -29,7 +30,7 @@ export const UsersPanel: React.FC = () => {
     <Divider></Divider>
     <Row gutter={[16, 24]}>
       {userData.props.children.map((ele: any) => (
-        ele.surname.toLowerCase().startsWith(search) ? (
+        ele.name.toLowerCase().startsWith(search) ? (
           <Card key={ele.id} onClick={() => {
 
             const redirect = `/UserPanel/${ele.id}`
@@ -39,9 +40,9 @@ export const UsersPanel: React.FC = () => {
 
           }} className="usersCard"
             hoverable
-            cover={<img src={defaultBG}/>}
+            cover={<img className="imgCard" src={ele.avatar}/>}
           >
-            <Meta title={ele.surname} description={ele.email} />
+            <Meta title={ele.name} description={ele.email} />
           </Card>
         ) : null
       ))}
