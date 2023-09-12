@@ -1,38 +1,25 @@
-import { Input, Divider, Row, Card, Space, Col, List, Button, Modal, Radio } from 'antd';
-import { EyeOutlined, SearchOutlined, CloseOutlined } from '@ant-design/icons';
+import { Divider, Row, Col, Button, Card } from 'antd';
+import { EyeOutlined } from '@ant-design/icons';
 import { API } from '../../modules/API'
+import { trimDate } from '../../modules/trimDate'
 import { useState } from 'react';
 import './UserPanel.scss';
-import {
-  BrowserRouter as Router,
-  Route,
-  useParams,
-} from "react-router-dom"
+import { useParams, } from "react-router-dom"
 import { UserModal } from '../UserModal/UserModal'
-
-interface DataType {
-  key: React.Key;
-  firstName: string;
-  lastName: string;
-  age: number;
-  address: string;
-  tags: string[];
-}
 
 export const UserPanel: React.FC = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showModal, setShowModal] = useState(<></>);
-
+  const { Meta } = Card;
   const userDataReports = API('reports')
   const userDataCandidates = API('candidates')
-
   let { id } = useParams();
 
 
   return <div className="fullWrapper">
     {isModalOpen ? showModal : null}
-    <Row justify="center" >
+    <Row justify="center">
       <Col span={6}><h1>Interviews Report</h1></Col>
       <Col span={4}></Col>
       <Col span={4}></Col>
@@ -43,38 +30,63 @@ export const UserPanel: React.FC = () => {
     {userDataCandidates.props.children.map((ele: any) => (
       ele.id == id ? (
         <>
-          <div className='userCardContainer' key={ele.id}>
-            <Row>
-              <Col span={4}>{<img src={ele.avatar} className='bgimg' />}</Col>
-              <Col span={10}>{ele.name}</Col>
-              <Col span={4}>{ele.birthday}</Col>
-            </Row>
-            <Row>
-              <Col span={4}></Col>
-              <Col span={10}>{ele.email}</Col>
-              <Col span={4}>{ele.education}</Col>
-            </Row>
-          </div>
+          <Row gutter={16} className='UserInfoContainer'>
+            <Col span={8}>
+              <Card
+                className="UserInfoContainer-Profile"
+                hoverable
+                cover={<img alt="example" src={ele.avatar} />}
+              >
+                <Meta description="Name" title={ele.name} />
+
+              </Card>
+            </Col>
+            <Col span={8}>
+              <Card className="UserInfoContainer-Card">
+                <Meta description="Email" title={ele.name} />
+              </Card>
+              <Card className="UserInfoContainer-Card">
+                <Meta description="Date of birth" title={trimDate(ele.birthday)} />
+              </Card>
+              <Card className="UserInfoContainer-Card">
+                <Meta description="Education" title={ele.education} />
+              </Card>
+            </Col>
+          </Row>
+
+
+
+
+
         </>
       ) : null
     ))}
-    <Divider orientation='left'>Reports</Divider>
+    <Divider orientation='left'><h1>Reports</h1></Divider>
     {userDataReports.props.children.map((ele: any) => (
       ele.candidateId == id ? (
         <div className="UserPanelWrraper" key={ele.id}>
-          <Row>
-            <Col span={8} className="">Company</Col>
-            <Col span={8} className="">Interview Date</Col>
-            <Col span={8} className="">Status</Col>
-          </Row>
-          <Row>
-            <Col span={6} className="">{ele.companyName}</Col>
-            <Col span={6} className="">{ele.interviewDate}</Col>
-            <Col span={6} className="">{ele.status}</Col>
-            <Col span={6} className=""><Button onClick={() => {
-              { isModalOpen ? setIsModalOpen(false) : setIsModalOpen(true) }
-              setShowModal(<UserModal companyName={ele.companyName} interviewDate={ele.interviewDate} phase={ele.phase} status={ele.status}/>)
-            }}><EyeOutlined /></Button></Col>
+          <Row gutter={1} key={ele.id}>
+            <Col span={9}>
+              <Card title="Company" bordered={false}>
+                {ele.companyName}
+              </Card>
+            </Col>
+            <Col span={9}>
+              <Card title="Interview Date" bordered={false}>
+                {trimDate(ele.interviewDate)}
+              </Card>
+            </Col>
+            <Col span={4}>
+              <Card title="Status" bordered={false}>
+                {ele.status}
+              </Card>
+            </Col>
+            <Col span={2}>
+              <Button className="User-modal-button-wrapper" onClick={() => {
+                { isModalOpen ? setIsModalOpen(false) : setIsModalOpen(true) }
+                setShowModal(<UserModal companyName={ele.companyName} interviewDate={trimDate(ele.interviewDate)} phase={ele.phase} status={ele.status} />)
+              }}><EyeOutlined /></Button>
+            </Col>
           </Row>
         </div>
       ) : null

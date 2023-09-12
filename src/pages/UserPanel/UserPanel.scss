@@ -26,4 +26,28 @@
 }
 .UserPanelWrraper{
   margin: 5%;
+  padding: 5%;
+  background-color: #bbb;
+}
+.User-modal-button-wrapper .anticon{
+color: black;
+}
+.User-modal-button-wrapper{
+height: 100%;
+}
+.UserInfoContainer{
+  background-color: #bbb;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.UserInfoContainer-Card{
+  height: auto;
+  width: 100%;
+margin: 10%;
+}
+.UserInfoContainer-Profile{
+  width: 100%;
+  margin: 10%;
+  height: auto;
 }
