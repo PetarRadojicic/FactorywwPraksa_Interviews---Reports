@@ -84,7 +84,7 @@ export const UserPanel: React.FC = () => {
             <Col span={2}>
               <Button className="User-modal-button-wrapper" onClick={() => {
                 { isModalOpen ? setIsModalOpen(false) : setIsModalOpen(true) }
-                setShowModal(<UserModal companyName={ele.companyName} interviewDate={trimDate(ele.interviewDate)} phase={ele.phase} status={ele.status} />)
+                setShowModal(<UserModal companyName={ele.companyName} interviewDate={trimDate(ele.interviewDate)} phase={ele.phase} status={ele.status} note={ele.note} />)
               }}><EyeOutlined /></Button>
             </Col>
           </Row>
