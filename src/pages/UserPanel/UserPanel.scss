@@ -25,15 +25,21 @@
   color: white;
 }
 .UserPanelWrraper{
-  margin: 5%;
-  padding: 5%;
+  text-align: center;
+  margin: 1%;
+  padding: 2%;
   background-color: #bbb;
 }
 .User-modal-button-wrapper .anticon{
+  font-size: xx-large;
 color: black;
 }
 .User-modal-button-wrapper{
+display: flex;
+justify-content: center;
+align-items: center;
 height: 100%;
+width: 100%;
 }
 .UserInfoContainer{
   background-color: #bbb;
@@ -50,4 +56,9 @@ margin: 10%;
   width: 100%;
   margin: 10%;
   height: auto;
+}
+.ant-card-body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

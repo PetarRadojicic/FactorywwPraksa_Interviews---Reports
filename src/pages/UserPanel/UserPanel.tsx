@@ -17,6 +17,10 @@ export const UserPanel: React.FC = () => {
   let { id } = useParams();
 
 
+  const closeModal = () => {
+    setIsModalOpen(false)
+  }
+
   return <div className="fullWrapper">
     {isModalOpen ? showModal : null}
     <Row justify="center">
@@ -53,11 +57,6 @@ export const UserPanel: React.FC = () => {
               </Card>
             </Col>
           </Row>
-
-
-
-
-
         </>
       ) : null
     ))}
@@ -84,7 +83,7 @@ export const UserPanel: React.FC = () => {
             <Col span={2}>
               <Button className="User-modal-button-wrapper" onClick={() => {
                 { isModalOpen ? setIsModalOpen(false) : setIsModalOpen(true) }
-                setShowModal(<UserModal companyName={ele.companyName} interviewDate={trimDate(ele.interviewDate)} phase={ele.phase} status={ele.status} note={ele.note} />)
+                setShowModal(<UserModal companyName={ele.companyName} interviewDate={trimDate(ele.interviewDate)} phase={ele.phase} status={ele.status} note={ele.note} close={closeModal} />)
               }}><EyeOutlined /></Button>
             </Col>
           </Row>
