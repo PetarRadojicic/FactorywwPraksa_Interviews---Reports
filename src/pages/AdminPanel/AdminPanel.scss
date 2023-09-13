@@ -4,8 +4,9 @@
 }
 
 .searchInput-AdminPanel {
+
     width: 55%;
-    margin-left: 25%;
+    margin-bottom: 5%;
 }
 
 .fullWrapper-UsersPanel {
@@ -47,9 +48,65 @@
     width: 50px;
     height: 50px;
 }
+.Admin-Reports-Wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    flex-wrap: nowrap;
+    margin: 5%;
+}
+.Control-User-Card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    flex-wrap: nowrap;
+    margin: 5%;
+}
+.Admin-img-Control{
+    width: 100%;
+    height: 300px;
+}
+.Admin-Button-Wrapper .anticon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: black;
+}
+.Admin-Button{
+    width: 100%;
+    height: 100;
+}
+.UserInfoContainer{
+    width: 100%;
+    height: 100%;
+}
+
 @media (max-width: 768px) {
     .Admin-img{
         width: auto;
         height: auto;
     }
+  }
+  .ADmin-Single{
+    height: 100%;
+    width: 100%;
+  }
+
+  .Admin-view{
+    width: 50%;
+  }
+  .Admin-view-COntainer{
+    display: flex;
+    width: 100%;
+  }
+  .searcahADminCOntainer{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
   }

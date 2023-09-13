@@ -6,75 +6,79 @@ import defaultBG from '../../assets/img/default.png';
 import { useState } from 'react';
 import { UserModal } from '../UserModal/UserModal'
 import './AdminPanel.scss';
+import { trimDate } from '../../modules/trimDate'
+import { CreateReport } from '../CreateReport/CreateReport';
 
 const { Meta } = Card;
 
 export const AdminPanel: React.FC = () => {
 
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [showModal, setShowModal] = useState(<></>);
-    let [mode, setmode] = useState('Reports');
+  let [mode, setmode] = useState('Reports');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showModal, setShowModal] = useState(<></>);
 
-    // const showModal = () => {
-    //     setIsModalOpen(true);
-    // };
+  const [search, setSearch] = useState('');
+  const searchSurname = (e: any) => {
+    setSearch(e.target.value.toLowerCase())
+  }
+  const closeModal = () => {
+    setIsModalOpen(false)
+  }
+  const userData = API('reports')
+  const userDataCandidates = API('candidates')
+  return <>
+    {isModalOpen ? showModal : null}
+    <Divider orientation='center' className="Divider-UsersPanel"><h1>Reports Administration</h1>
+      <Radio.Group className="Admin-view-COntainer" value={mode} onChange={(e) => setmode(e.target.value)}>
+        <Radio.Button className="Admin-view" value={'Reports'}>Reports</Radio.Button>
+        <Radio.Button className="Admin-view" value={'Create Report'}>Create Report</Radio.Button>
+      </Radio.Group>
+    </Divider>
+    <div className='searcahADminCOntainer'>
+      <Input onChange={searchSurname} className="searchInput-AdminPanel" addonBefore={<SearchOutlined />} placeholder="Search" />
+    </div>
 
-    const handleOk = () => {
-        setIsModalOpen(false);
-    };
+    {mode == 'Reports' ? userData.props.children.map((ele: any) => (
+      ele.candidateName.toLowerCase().startsWith(search) ? (
+        <div className="UserPanelWrraper" key={ele.id}>
+          <Row gutter={1} key={ele.id} >
+            <Col span={5}>
+              <Card className="ADmin-Single" title="Company" bordered={false}>
+                {ele.companyName}
+              </Card>
+            </Col>
+            <Col span={5}>
+              <Card className="ADmin-Single" title="Interview Date" bordered={false}>
+                {trimDate(ele.interviewDate)}
+              </Card>
+            </Col>
+            <Col span={6}>
+              <Card className="ADmin-Single" title="Candidate Name" bordered={false}>
+                {ele.candidateName}
+              </Card>
+            </Col>
+            <Col span={4}>
+              <Card className="ADmin-Single" title="Status" bordered={false}>
+                {ele.status}
+              </Card>
+            </Col>
+            <Col span={2}>
+              <Button className="User-modal-button-wrapper" onClick={() => {
+                { isModalOpen ? setIsModalOpen(false) : setIsModalOpen(true) }
+                setShowModal(<UserModal companyName={ele.companyName} interviewDate={trimDate(ele.interviewDate)} phase={ele.phase} status={ele.status} note={ele.note} close={closeModal} candidateName={ele.candidateName} />)
+              }}><EyeOutlined /></Button>
+            </Col>
+            <Col span={2}>
+              <Button className="User-modal-button-wrapper" onClick={() => { }}><CloseOutlined /></Button>
+            </Col>
+          </Row>
+        </div>
 
-    const handleCancel = () => {
-        setIsModalOpen(false);
-    };
-
-
-    const Passed: boolean = false;
-
-    const [search, setSearch] = useState('');
-    const searchSurname = (e: any) => {
-        setSearch(e.target.value.toLowerCase())
-    }
-
-    const userData = API('users')
-    return mode == 'Reports' ? <div className='fullWrapper-UsersPanel'>
-        {isModalOpen ? showModal : null}
-        <Divider orientation='center' className="Divider-UsersPanel"><h1>Reports Administration</h1>
-            <Radio.Group value={mode} onChange={(e) => setmode(e.target.value)}>
-                <Radio.Button value={'Reports'}>Reports</Radio.Button>
-                <Radio.Button value={'Create Report'}>Create Report</Radio.Button>
-            </Radio.Group>
-        </Divider>
-        <Input onChange={searchSurname} className="searchInput-AdminPanel" addonBefore={<SearchOutlined />} placeholder="Search" />
-        <Divider></Divider>
-        {userData.props.children.map((ele: any) => (
-            ele.surname.toLowerCase().startsWith(search) ? (
-                <Row justify="space-around" key={ele.id} className="Users-Wrapper">
-                    <Col span={4}>{ele.surname}</Col>
-                    <Col span={4}>{ele.name}</Col>
-                    <Col span={4}>{ele.age}</Col>
-                    <Col span={4}>{Passed ? <>Passed</> : <>Declined</>}</Col>
-                    <Col span={4} className="Admin-Button-Wrapper"><Button onClick={() => {
-                        { isModalOpen ? setIsModalOpen(false) : setIsModalOpen(true) }
-                        // setShowModal(<UserModal/>)
-                    }}><EyeOutlined /></Button><Button><CloseOutlined /></Button></Col>
-                </Row>
-            ) : null
-        ))}
-    </div> : <div className='fullWrapper-UsersPanel'><Divider orientation='center' className="Divider-UsersPanel"><h1>Reports Administration</h1>
-        <Radio.Group value={mode} onChange={(e) => setmode(e.target.value)}>
-            <Radio.Button value={'Reports'}>Reports</Radio.Button>
-            <Radio.Button value={'Create Report'}>Create Report</Radio.Button>
-        </Radio.Group>
-    </Divider> <div className='Admin-panel-report-wrapper'>{userData.props.children.map((ele: any) => (
-        ele.surname.toLowerCase().startsWith(search) ? (
-          <Card key={ele.id} className="Admin-usersCard"
-            hoverable
-            cover={<img src={defaultBG}  className='Admin-img'/>}
-          >
-            <Meta title={ele.surname} description={ele.email} />
-          </Card>
-        ) : null
-      ))}</div></div>
+      ) : null
+    )) : <CreateReport />}
+  </>
 }
+
+
 
 

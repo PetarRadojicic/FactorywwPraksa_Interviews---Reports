@@ -9,6 +9,7 @@ interface AdminProps {
   status: number,
   note: string,
   close: Function,
+  candidateName :string
 }
 
 const tabList = [
@@ -38,7 +39,7 @@ const tabList = [
 
 export const UserModal: React.FC<AdminProps> = (props: any): JSX.Element => {
 
-
+ console.log(props)
   const [activeTabKey1, setActiveTabKey1] = useState<string>('tab1');
 
   const contentList: Record<string, React.ReactNode> = {
@@ -57,7 +58,7 @@ export const UserModal: React.FC<AdminProps> = (props: any): JSX.Element => {
     <Modal open={true} onOk={props.close} onCancel={props.close}>
     <Card
         className='Moda-USer'
-        title={'Temp'}
+        title={props.candidateName}
         tabList={tabList}
         activeTabKey={activeTabKey1}
         onTabChange={onTab1Change}

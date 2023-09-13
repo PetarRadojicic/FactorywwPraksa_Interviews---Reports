@@ -2,7 +2,7 @@ import { Divider, Row, Col, Button, Card } from 'antd';
 import { EyeOutlined } from '@ant-design/icons';
 import { API } from '../../modules/API'
 import { trimDate } from '../../modules/trimDate'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './UserPanel.scss';
 import { useParams, } from "react-router-dom"
 import { UserModal } from '../UserModal/UserModal'
@@ -42,7 +42,6 @@ export const UserPanel: React.FC = () => {
                 cover={<img alt="example" src={ele.avatar} />}
               >
                 <Meta description="Name" title={ele.name} />
-
               </Card>
             </Col>
             <Col span={8}>
@@ -83,7 +82,7 @@ export const UserPanel: React.FC = () => {
             <Col span={2}>
               <Button className="User-modal-button-wrapper" onClick={() => {
                 { isModalOpen ? setIsModalOpen(false) : setIsModalOpen(true) }
-                setShowModal(<UserModal companyName={ele.companyName} interviewDate={trimDate(ele.interviewDate)} phase={ele.phase} status={ele.status} note={ele.note} close={closeModal} />)
+                setShowModal(<UserModal companyName={ele.companyName} interviewDate={trimDate(ele.interviewDate)} phase={ele.phase} status={ele.status} note={ele.note} close={closeModal} candidateName={ele.candidateName}/>)
               }}><EyeOutlined /></Button>
             </Col>
           </Row>
