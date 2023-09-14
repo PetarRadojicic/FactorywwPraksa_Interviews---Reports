@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { UserModal } from '../UserModal/UserModal'
 import './AdminPanel.scss';
 import { trimDate } from '../../modules/trimDate'
-import { CreateReport } from '../CreateReport/CreateReport';
+import { WizardReports } from '../WizardReports/WizardReports';
 
 const { Meta } = Card;
 
@@ -75,7 +75,7 @@ export const AdminPanel: React.FC = () => {
         </div>
 
       ) : null
-    )) : <CreateReport />}
+    )) : <WizardReports />}
   </>
 }
 

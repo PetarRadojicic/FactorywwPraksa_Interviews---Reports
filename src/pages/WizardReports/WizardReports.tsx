@@ -1,25 +1,11 @@
 import React, { useState } from 'react';
-import { Progress, Row, Col, Card, Divider, Space } from 'antd';
-import {
-    Button,
-    Cascader,
-    Checkbox,
-    DatePicker,
-    Form,
-    Input,
-    InputNumber,
-    Radio,
-    Select,
-    Slider,
-    Switch,
-    TreeSelect,
-    Upload,
-} from 'antd';
+import {Progress, Row, Button, Card, Divider, Select, DatePicker,Form,Input,} from 'antd';
 import dayjs, { Dayjs } from 'dayjs';
 import { API } from '../../modules/API'
-import './CreateReport.scss';
+import './WizardReports.scss';
+import {API_Send} from '../../modules/API_Send'
 
-export const CreateReport: React.FC = () => {
+export const WizardReports: React.FC = () => {
     const { Meta } = Card;
     const [search, setSearch] = useState('');
     const searchSurname = (e: any) => {
@@ -39,19 +25,22 @@ export const CreateReport: React.FC = () => {
     const companies = API('companies')
 
 
+    const sendData = (where:any,data:any) => {
+        API_Send(where,data);
+    }
 
     const [changeWizardStep, setChangeWizardStep] = useState(1);
 
     function generateRandomNumber(): number {
-        const min = 10000000; // minimum 8-digit number
-        const max = 99999999; // maximum 8-digit number
+        const min = 10000000;
+        const max = 99999999;
         return Math.floor(Math.random() * (max - min + 1)) + min;
-      }
+    }
 
-    const [candidateId,setCandidateId] = useState()
-    const [candidateName,setCandidateName] = useState()
-    const [companyId,setCompanyId] = useState()
-    const [companyName,setCompanyName] = useState()
+    const [candidateId, setCandidateId] = useState()
+    const [candidateName, setCandidateName] = useState()
+    const [companyId, setCompanyId] = useState()
+    const [companyName, setCompanyName] = useState()
     const [interviewDate, setInterviewDate] = useState<Dayjs | null>(null);
     const [phase, setPhase] = useState('');
     const [status, setStatus] = useState('');
@@ -67,18 +56,14 @@ export const CreateReport: React.FC = () => {
         "phase": phase,
         "status": status,
         "note": note
-      }
-
-
-
-
-
-
-
+    }
 
     const handleSubmit = () => {
+        setChangeWizardStep(4)
+        setProgress(100)
         if (interviewDate !== null) {
-            console.log(interviewDate.format('ddd MMMM DD YYYY'));
+            console.log(SEND_VALUES_CREATE_REPORT);
+            sendData('reports',SEND_VALUES_CREATE_REPORT);
         } else {
             console.log('interviewDate is null');
         }
@@ -180,7 +165,7 @@ export const CreateReport: React.FC = () => {
                         </Form>
 
                     </>
-                        : <></>}
+                        : <Button href='/AdminPanel'></Button>}
 
 
         </Row>
