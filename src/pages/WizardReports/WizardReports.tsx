@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Progress, Row, Button, Card, Divider, Select, DatePicker, Form, Input,Col } from 'antd';
+import { Progress, Row, Button, Card, Divider, Select, DatePicker, Form, Input, Col } from 'antd';
 import { Dayjs } from 'dayjs';
 import { submitInterview } from '../../modules/API'
 import './WizardReports.scss';
@@ -8,7 +8,6 @@ import { getInterview } from '../../modules/API';
 
 export const WizardReports: React.FC = () => {
     const { Meta } = Card;
-
     const { RangePicker } = DatePicker;
     const { TextArea } = Input;
 
@@ -138,7 +137,7 @@ export const WizardReports: React.FC = () => {
                 : changeWizardStep == 2 ? companies.map((ele: any) => (
                     ele.name.toLowerCase().startsWith(search) ? (
 
-                        <Card key={ele.id} onClick={(e) => {
+                        <Card key={ele.id} onClick={() => {
                             setLoading2(false)
                             setCompanyName(ele.name)
                             setProgress(66)
@@ -158,7 +157,7 @@ export const WizardReports: React.FC = () => {
                                 <DatePicker className="SinleInputdate" onChange={date => setInterviewDate(date)} />
                             </Form.Item>
                             <Divider></Divider>
-                            <Form.Item label="Phase" className="SinleInput">
+                            <Form.Item label="Phase" className="SinleInput" rules={[{ required: true, message: 'Please input your username!' }]}>
                                 <Select onChange={value => setPhase(value)}>
                                     <Select.Option value="hr">hr</Select.Option>
                                     <Select.Option value="cv">cv</Select.Option>
