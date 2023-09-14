@@ -24,8 +24,8 @@ export const AdminPanel: React.FC = () => {
   const closeModal = () => {
     setIsModalOpen(false)
   }
-  const userData = API('reports')
-  const userDataCandidates = API('candidates')
+  const userData = API('reports','get')
+  const userDataCandidates = API('candidates','get')
   return <>
     {isModalOpen ? showModal : null}
     <Divider orientation='center' className="Divider-UsersPanel"><h1>Reports Administration</h1>
@@ -69,7 +69,7 @@ export const AdminPanel: React.FC = () => {
               }}><EyeOutlined /></Button>
             </Col>
             <Col span={2}>
-              <Button className="User-modal-button-wrapper" onClick={() => { }}><CloseOutlined /></Button>
+              <Button className="User-modal-button-wrapper" onClick={() => {API(`reports/${ele.id}`,'delete') }}><CloseOutlined /></Button>
             </Col>
           </Row>
         </div>

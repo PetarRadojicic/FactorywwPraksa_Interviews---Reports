@@ -3,7 +3,6 @@ import {Progress, Row, Button, Card, Divider, Select, DatePicker,Form,Input,} fr
 import dayjs, { Dayjs } from 'dayjs';
 import { API } from '../../modules/API'
 import './WizardReports.scss';
-import {API_Send} from '../../modules/API_Send'
 
 export const WizardReports: React.FC = () => {
     const { Meta } = Card;
@@ -21,13 +20,9 @@ export const WizardReports: React.FC = () => {
     const [Title, setTitle] = useState("Select Candidate");
 
 
-    const userDataCandidates = API('candidates')
-    const companies = API('companies')
+    const userDataCandidates = API('candidates',"get")
+    const companies = API('companies',"get")
 
-
-    const sendData = (where:any,data:any) => {
-        API_Send(where,data);
-    }
 
     const [changeWizardStep, setChangeWizardStep] = useState(1);
 
@@ -63,7 +58,7 @@ export const WizardReports: React.FC = () => {
         setProgress(100)
         if (interviewDate !== null) {
             console.log(SEND_VALUES_CREATE_REPORT);
-            sendData('reports',SEND_VALUES_CREATE_REPORT);
+            API("reports","post",SEND_VALUES_CREATE_REPORT);
         } else {
             console.log('interviewDate is null');
         }

@@ -12,8 +12,8 @@ export const UserPanel: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showModal, setShowModal] = useState(<></>);
   const { Meta } = Card;
-  const userDataReports = API('reports')
-  const userDataCandidates = API('candidates')
+  const userDataReports = API('reports','get')
+  const userDataCandidates = API('candidates','get')
   let { id } = useParams();
 
 

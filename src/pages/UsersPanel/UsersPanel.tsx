@@ -18,7 +18,7 @@ export const UsersPanel: React.FC = () => {
     setSearch(e.target.value.toLowerCase())
   }
 
-  const userData = API('candidates')
+  const userData = API('candidates','get')
   return <div className='fullWrapper-UsersPanel'>
     <Divider orientation='center' className="Divider-UsersPanel"><h1>Interviews Report</h1></Divider>
     <Row justify="start" >
