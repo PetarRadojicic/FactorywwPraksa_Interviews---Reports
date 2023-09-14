@@ -1,11 +1,9 @@
 import { Input, Divider, Row, Card, Space, Col } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
-import { API } from '../../modules/API';
-import { useState } from 'react';
+import { getInterview } from '../../modules/API';
+import { useState,useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import './UsersPanel.scss';
-
-
 
 const { Meta } = Card;
 
@@ -18,7 +16,19 @@ export const UsersPanel: React.FC = () => {
     setSearch(e.target.value.toLowerCase())
   }
 
-  const userData = API('candidates','get')
+  const [candidates, setCandidates] = useState([]);
+
+  useEffect(() => {
+    getInterview('candidates')
+      .then(response => {
+        setCandidates(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching interview:', error);
+      });
+  }, []);
+
+
   return <div className='fullWrapper-UsersPanel'>
     <Divider orientation='center' className="Divider-UsersPanel"><h1>Interviews Report</h1></Divider>
     <Row justify="start" >
@@ -29,14 +39,13 @@ export const UsersPanel: React.FC = () => {
     </Row>
     <Divider></Divider>
     <Row gutter={[16, 24]}>
-      {userData.props.children.map((ele: any) => (
+      {candidates.map((ele: any) => (
         ele.name.toLowerCase().startsWith(search) ? (
           <Card key={ele.id} onClick={() => {
 
             const redirect = `/UserPanel/${ele.id}`
 
             navigate(redirect);
-
 
           }} className="usersCard"
             hoverable
@@ -46,7 +55,6 @@ export const UsersPanel: React.FC = () => {
           </Card>
         ) : null
       ))}
-
     </Row>
   </div>
 }

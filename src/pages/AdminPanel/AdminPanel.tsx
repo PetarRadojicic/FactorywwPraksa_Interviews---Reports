@@ -1,9 +1,7 @@
-import { Input, Divider, Row, Card, Space, Col, List, Button, Modal, Radio } from 'antd';
-import Icon, { HomeOutlined } from '@ant-design/icons';
+import { Input, Divider, Row, Card, Col, Button, Radio } from 'antd';
 import { EyeOutlined, SearchOutlined, CloseOutlined } from '@ant-design/icons';
-import { API } from '../../modules/API'
-import defaultBG from '../../assets/img/default.png';
-import { useState } from 'react';
+import {getInterview } from '../../modules/API'
+import { useState,useEffect } from 'react';
 import { UserModal } from '../UserModal/UserModal'
 import './AdminPanel.scss';
 import { trimDate } from '../../modules/trimDate'
@@ -16,6 +14,7 @@ export const AdminPanel: React.FC = () => {
   let [mode, setmode] = useState('Reports');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showModal, setShowModal] = useState(<></>);
+  const [reports, setReports] = useState([]);
 
   const [search, setSearch] = useState('');
   const searchSurname = (e: any) => {
@@ -24,8 +23,19 @@ export const AdminPanel: React.FC = () => {
   const closeModal = () => {
     setIsModalOpen(false)
   }
-  const userData = API('reports','get')
-  const userDataCandidates = API('candidates','get')
+
+  useEffect(() => {
+    getInterview('reports')
+      .then(response => {
+        setReports(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching interview:', error);
+      });
+  }, []);
+
+
+
   return <>
     {isModalOpen ? showModal : null}
     <Divider orientation='center' className="Divider-UsersPanel"><h1>Reports Administration</h1>
@@ -34,11 +44,10 @@ export const AdminPanel: React.FC = () => {
         <Radio.Button className="Admin-view" value={'Create Report'}>Create Report</Radio.Button>
       </Radio.Group>
     </Divider>
-    <div className='searcahADminCOntainer'>
+    {mode == 'Reports' ? <div className='searcahADminCOntainer'>
       <Input onChange={searchSurname} className="searchInput-AdminPanel" addonBefore={<SearchOutlined />} placeholder="Search" />
-    </div>
-
-    {mode == 'Reports' ? userData.props.children.map((ele: any) => (
+    </div> : <></>}
+    {mode == 'Reports' ? reports.map((ele: any) => (
       ele.candidateName.toLowerCase().startsWith(search) ? (
         <div className="UserPanelWrraper" key={ele.id}>
           <Row gutter={1} key={ele.id} >
@@ -69,7 +78,7 @@ export const AdminPanel: React.FC = () => {
               }}><EyeOutlined /></Button>
             </Col>
             <Col span={2}>
-              <Button className="User-modal-button-wrapper" onClick={() => {API(`reports/${ele.id}`,'delete') }}><CloseOutlined /></Button>
+              <Button className="User-modal-button-wrapper" onClick={() => {  }}><CloseOutlined /></Button>
             </Col>
           </Row>
         </div>
@@ -79,6 +88,6 @@ export const AdminPanel: React.FC = () => {
   </>
 }
 
-
+// API(`reports/${ele.id}`, 'delete')
 
 

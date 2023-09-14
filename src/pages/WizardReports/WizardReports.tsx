@@ -1,15 +1,13 @@
-import React, { useState } from 'react';
-import {Progress, Row, Button, Card, Divider, Select, DatePicker,Form,Input,} from 'antd';
-import dayjs, { Dayjs } from 'dayjs';
-import { API } from '../../modules/API'
+import React, { useState,useEffect } from 'react';
+import { Progress, Row, Button, Card, Divider, Select, DatePicker, Form, Input, } from 'antd';
+import { Dayjs } from 'dayjs';
+import { submitInterview } from '../../modules/API'
 import './WizardReports.scss';
+import { SearchOutlined } from '@ant-design/icons';
+import { getInterview } from '../../modules/API';
 
 export const WizardReports: React.FC = () => {
     const { Meta } = Card;
-    const [search, setSearch] = useState('');
-    const searchSurname = (e: any) => {
-        setSearch(e.target.value.toLowerCase())
-    }
 
     const { RangePicker } = DatePicker;
     const { TextArea } = Input;
@@ -20,11 +18,36 @@ export const WizardReports: React.FC = () => {
     const [Title, setTitle] = useState("Select Candidate");
 
 
-    const userDataCandidates = API('candidates',"get")
-    const companies = API('companies',"get")
-
+    const [candidates, setCandidates] = useState([]);
+    const [companies, setCompanies] = useState([]);
+  
+  
+    useEffect(() => {
+      getInterview('candidates')
+        .then(response => {
+          setCandidates(response.data);
+        })
+        .catch(error => {
+          console.error('Error fetching interview:', error);
+        });
+    }, []);
+  
+    useEffect(() => {
+      getInterview('companies')
+        .then(response => {
+            setCompanies(response.data);
+        })
+        .catch(error => {
+          console.error('Error fetching interview:', error);
+        });
+    }, []);
 
     const [changeWizardStep, setChangeWizardStep] = useState(1);
+
+    const [search, setSearch] = useState('');
+    const searchSurname = (e: any) => {
+        setSearch(e.target.value.toLowerCase())
+    }
 
     function generateRandomNumber(): number {
         const min = 10000000;
@@ -53,33 +76,32 @@ export const WizardReports: React.FC = () => {
         "note": note
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         setChangeWizardStep(4)
         setProgress(100)
         if (interviewDate !== null) {
-            console.log(SEND_VALUES_CREATE_REPORT);
-            API("reports","post",SEND_VALUES_CREATE_REPORT);
+            try {
+                await submitInterview('reports',SEND_VALUES_CREATE_REPORT)
+                
+            } catch (e) {
+
+                alert(e)
+
+            }
         } else {
             console.log('interviewDate is null');
         }
     };
 
-
-
-
-
-
-
-
-
-
-
-
     return <>
+        <div className='searcahADminCOntainer'>
+            <Input onChange={searchSurname} className="searchInput-AdminPanel" addonBefore={<SearchOutlined />} placeholder="Search" />
+        </div>
         <div className='percent'>
             <Progress percent={progress} />
         </div>
         <Divider><h1>{Title}</h1></Divider>
+
         <div className='CardSelectorContainer'>
             <Card loading={loading} className='CardSelector'>
                 <Meta
@@ -95,11 +117,11 @@ export const WizardReports: React.FC = () => {
                     description={companyName}
                 />
             </Card>
-        </div>
 
+        </div>
         <Row gutter={[16, 24]}>
 
-            {changeWizardStep == 1 ? userDataCandidates.props.children.map((ele: any) => (
+            {changeWizardStep == 1 ? candidates.map((ele: any) => (
                 ele.name.toLowerCase().startsWith(search) ? (
 
                     <Card key={ele.id} onClick={() => {
@@ -118,7 +140,7 @@ export const WizardReports: React.FC = () => {
                     </Card>
                 ) : null
             ))
-                : changeWizardStep == 2 ? companies.props.children.map((ele: any) => (
+                : changeWizardStep == 2 ? companies.map((ele: any) => (
                     ele.name.toLowerCase().startsWith(search) ? (
 
                         <Card key={ele.id} onClick={(e) => {
@@ -160,9 +182,7 @@ export const WizardReports: React.FC = () => {
                         </Form>
 
                     </>
-                        : <Button href='/AdminPanel'></Button>}
-
-
+                        : <Button href='/AdminPanel' className='goBack'>GoBack</Button>}
         </Row>
     </>;
 }

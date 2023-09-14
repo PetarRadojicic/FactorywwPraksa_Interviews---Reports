@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal, Card, Col } from 'antd';
+import { Modal, Card } from 'antd';
 import './UserModal.scss';
 
 interface AdminProps {
@@ -34,8 +34,6 @@ const tabList = [
     tab: 'Notes',
   },
 ];
-
-
 
 export const UserModal: React.FC<AdminProps> = (props: any): JSX.Element => {
 

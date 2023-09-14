@@ -1,8 +1,8 @@
 import { Divider, Row, Col, Button, Card } from 'antd';
 import { EyeOutlined } from '@ant-design/icons';
-import { API } from '../../modules/API'
+import { getInterview } from '../../modules/API'
 import { trimDate } from '../../modules/trimDate'
-import { useState, useEffect } from 'react';
+import { useState,useEffect } from 'react';
 import './UserPanel.scss';
 import { useParams, } from "react-router-dom"
 import { UserModal } from '../UserModal/UserModal'
@@ -12,8 +12,31 @@ export const UserPanel: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showModal, setShowModal] = useState(<></>);
   const { Meta } = Card;
-  const userDataReports = API('reports','get')
-  const userDataCandidates = API('candidates','get')
+  const [candidates, setCandidates] = useState([]);
+  const [reports, setReports] = useState([]);
+
+
+  useEffect(() => {
+    getInterview('candidates')
+      .then(response => {
+        setCandidates(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching interview:', error);
+      });
+  }, []);
+
+  useEffect(() => {
+    getInterview('reports')
+      .then(response => {
+        setReports(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching interview:', error);
+      });
+  }, []);
+
+
   let { id } = useParams();
 
 
@@ -31,7 +54,7 @@ export const UserPanel: React.FC = () => {
     </Row>
     <Divider></Divider>
 
-    {userDataCandidates.props.children.map((ele: any) => (
+    {candidates.map((ele: any) => (
       ele.id == id ? (
         <>
           <Row gutter={16} className='UserInfoContainer'>
@@ -60,7 +83,7 @@ export const UserPanel: React.FC = () => {
       ) : null
     ))}
     <Divider orientation='left'><h1>Reports</h1></Divider>
-    {userDataReports.props.children.map((ele: any) => (
+    {reports.map((ele: any) => (
       ele.candidateId == id ? (
         <div className="UserPanelWrraper" key={ele.id}>
           <Row gutter={1} key={ele.id}>
