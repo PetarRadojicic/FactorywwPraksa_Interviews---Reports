@@ -1,5 +1,5 @@
-import React, { useState,useEffect } from 'react';
-import { Progress, Row, Button, Card, Divider, Select, DatePicker, Form, Input, } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Progress, Row, Button, Card, Divider, Select, DatePicker, Form, Input,Col } from 'antd';
 import { Dayjs } from 'dayjs';
 import { submitInterview } from '../../modules/API'
 import './WizardReports.scss';
@@ -14,32 +14,32 @@ export const WizardReports: React.FC = () => {
 
     const [loading, setLoading] = useState(true);
     const [loading2, setLoading2] = useState(true);
-    const [progress, setProgress] = useState(33);
+    const [progress, setProgress] = useState(0);
     const [Title, setTitle] = useState("Select Candidate");
 
 
     const [candidates, setCandidates] = useState([]);
     const [companies, setCompanies] = useState([]);
-  
-  
+
+
     useEffect(() => {
-      getInterview('candidates')
-        .then(response => {
-          setCandidates(response.data);
-        })
-        .catch(error => {
-          console.error('Error fetching interview:', error);
-        });
+        getInterview('candidates')
+            .then(response => {
+                setCandidates(response.data);
+            })
+            .catch(error => {
+                console.error('Error fetching interview:', error);
+            });
     }, []);
-  
+
     useEffect(() => {
-      getInterview('companies')
-        .then(response => {
-            setCompanies(response.data);
-        })
-        .catch(error => {
-          console.error('Error fetching interview:', error);
-        });
+        getInterview('companies')
+            .then(response => {
+                setCompanies(response.data);
+            })
+            .catch(error => {
+                console.error('Error fetching interview:', error);
+            });
     }, []);
 
     const [changeWizardStep, setChangeWizardStep] = useState(1);
@@ -77,19 +77,14 @@ export const WizardReports: React.FC = () => {
     }
 
     const handleSubmit = async () => {
-        setChangeWizardStep(4)
-        setProgress(100)
-        if (interviewDate !== null) {
-            try {
-                await submitInterview('reports',SEND_VALUES_CREATE_REPORT)
-                
-            } catch (e) {
+        try {
+            await submitInterview('reports', SEND_VALUES_CREATE_REPORT)
+            setChangeWizardStep(4)
+            setProgress(100)
+        } catch (e) {
 
-                alert(e)
+            alert(e)
 
-            }
-        } else {
-            console.log('interviewDate is null');
         }
     };
 
@@ -159,9 +154,10 @@ export const WizardReports: React.FC = () => {
                 ))
                     : changeWizardStep == 3 ? <>
                         <Form className="InputWrapperReport">
-                            <Form.Item label="InterView Date" className="SinleInput">
-                                <DatePicker onChange={date => setInterviewDate(date)} />
+                            <Form.Item label="InterView Date" className="SinleInputdate">
+                                <DatePicker className="SinleInputdate" onChange={date => setInterviewDate(date)} />
                             </Form.Item>
+                            <Divider></Divider>
                             <Form.Item label="Phase" className="SinleInput">
                                 <Select onChange={value => setPhase(value)}>
                                     <Select.Option value="hr">hr</Select.Option>
@@ -169,15 +165,18 @@ export const WizardReports: React.FC = () => {
                                     <Select.Option value="final">final</Select.Option>
                                 </Select>
                             </Form.Item>
+                            <Divider></Divider>
                             <Form.Item label="Status" className="SinleInput">
                                 <Select onChange={value => setStatus(value)}>
                                     <Select.Option value="passed">passed</Select.Option>
                                     <Select.Option value="declined">declined</Select.Option>
                                 </Select>
                             </Form.Item>
+                            <Divider></Divider>
                             <Form.Item label="Notes" className="SinleInput">
                                 <Input.TextArea rows={4} onChange={e => setNote(e.target.value)} />
                             </Form.Item>
+                            <Divider></Divider>
                             <Button className="BtnSinleInput" onClick={handleSubmit}>Submit</Button>
                         </Form>
 

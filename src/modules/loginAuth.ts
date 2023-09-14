@@ -1,6 +1,6 @@
 export const loginAuth = (username: string, password: string) => {
 
-    if (username && password == 'root') {
+    if (username && password == 'admin') {
         return "AdminPanel"
     }
     else {

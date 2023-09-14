@@ -1,6 +1,6 @@
 import { Input, Divider, Row, Card, Col, Button, Radio } from 'antd';
 import { EyeOutlined, SearchOutlined, CloseOutlined } from '@ant-design/icons';
-import {getInterview } from '../../modules/API'
+import {getInterview,deleteInterview } from '../../modules/API'
 import { useState,useEffect } from 'react';
 import { UserModal } from '../UserModal/UserModal'
 import './AdminPanel.scss';
@@ -35,6 +35,16 @@ export const AdminPanel: React.FC = () => {
   }, []);
 
 
+  const deleteReport = async (id:any) => {
+    try {
+        await deleteInterview('reports',id)
+        
+    } catch (e) {
+
+        alert(e)
+
+    }
+} 
 
   return <>
     {isModalOpen ? showModal : null}
@@ -78,7 +88,7 @@ export const AdminPanel: React.FC = () => {
               }}><EyeOutlined /></Button>
             </Col>
             <Col span={2}>
-              <Button className="User-modal-button-wrapper" onClick={() => {  }}><CloseOutlined /></Button>
+            <Button className="User-modal-button-wrapper" onClick={() => deleteReport(ele.id)}><CloseOutlined /></Button>
             </Col>
           </Row>
         </div>
@@ -87,7 +97,4 @@ export const AdminPanel: React.FC = () => {
     )) : <WizardReports />}
   </>
 }
-
-// API(`reports/${ele.id}`, 'delete')
-
 
