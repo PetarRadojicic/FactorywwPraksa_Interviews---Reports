@@ -34,5 +34,6 @@ export const loginAuth = async (username: string, password: string) => {
         }
     }
 
+    alert("User doesn't exist")
     return "";
 }
