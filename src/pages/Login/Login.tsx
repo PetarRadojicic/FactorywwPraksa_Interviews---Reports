@@ -10,6 +10,7 @@ export const Login: React.FC = () => {
 
     const onFinish = async (values: any) => {
         const redirect: string = await loginAuth(values.username, values.password);
+        console.log(redirect)
         navigate(redirect);
     };
 
@@ -21,8 +22,6 @@ export const Login: React.FC = () => {
         username: string;
         password: string;
     };
-
-
     return <>
 
         <Form

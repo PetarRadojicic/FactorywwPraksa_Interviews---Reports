@@ -1,26 +1,38 @@
-import {getToken} from '../modules/token'
+import { getToken } from '../modules/token'
+import { getInterview } from '../modules/API'
 
-export const loginAuth = (username: string, password: string) => {
+export const loginAuth = async (username: string, password: string) => {
+    let gettoken = false;
+    const response = await getInterview('users', sessionStorage.getItem("token"));
 
-    //DEBUG 
+    const user = response.data.find((ele: any) => {
+        if (username === ele.email && password === 'developer') {
+            if (ele.admin) {
+                const payload = {
+                    "email": username,
+                    "password": password
+                }
 
-    const payload = {
-        "email": "dev@dev.com",
-        "password": "developer"
-      }
+                getToken("token", payload)
 
-      getToken("token",payload)
+                console.log('Admin')
+                gettoken = true;
+                return true;
+            } else {
+                console.log('User')
+                return true;
+            }
+        }
+        return false;
+    });
 
-    //   console.log(token)
-    //   const payload = {
-    //       "email": username,
-    //       "password": password
-    //     }
-
-    if (username == 'dev@dev.com') {
-        return "AdminPanel"
+    if (user) {
+        if (gettoken) {
+            return "AdminPanel";
+        } else {
+            return "UsersPanel";
+        }
     }
-    else {
-        return "UsersPanel"
-    }
+
+    return "";
 }

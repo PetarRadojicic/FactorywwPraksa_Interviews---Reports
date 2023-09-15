@@ -14,6 +14,8 @@
     "antd": "^5.9.0",
     "await-to-js": "^3.0.0",
     "axios": "^1.5.0",
+    "bcrypt": "^5.1.1",
+    "bcryptjs": "^2.4.3",
     "react": "^18.2.0",
     "react-css-modules": "^4.7.11",
     "react-dom": "^18.2.0",
@@ -47,6 +49,8 @@
     ]
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/bcryptjs": "^2.4.3",
     "node-sass": "^9.0.0",
     "react-router-dom": "^6.15.0"
   }
