@@ -15,6 +15,7 @@ export const AdminPanel: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showModal, setShowModal] = useState(<></>);
   const [reports, setReports] = useState([]);
+  const [RE, setRE] = useState(1);
 
   const [search, setSearch] = useState('');
   const searchSurname = (e: any) => {
@@ -25,19 +26,24 @@ export const AdminPanel: React.FC = () => {
   }
 
   useEffect(() => {
-    getInterview('reports')
+    getInterview('reports',sessionStorage.getItem("token"))
       .then(response => {
         setReports(response.data);
       })
       .catch(error => {
         console.error('Error fetching interview:', error);
       });
-  }, []);
+  }, [RE]);
 
+
+  const onDelete = async (values: any) => {
+    deleteReport(values)
+    setRE(RE + 1)
+};
 
   const deleteReport = async (id:any) => {
     try {
-        await deleteInterview('reports',id)
+        await deleteInterview('reports',id,sessionStorage.getItem("token"))
         
     } catch (e) {
 
@@ -68,7 +74,7 @@ export const AdminPanel: React.FC = () => {
             </Col>
             <Col span={5}>
               <Card className="ADmin-Single" title="Interview Date" bordered={false}>
-                {trimDate(ele.interviewDate)}
+                {(ele.interviewDate)}
               </Card>
             </Col>
             <Col span={6}>
@@ -88,7 +94,7 @@ export const AdminPanel: React.FC = () => {
               }}><EyeOutlined /></Button>
             </Col>
             <Col span={2}>
-            <Button className="User-modal-button-wrapper" onClick={() => deleteReport(ele.id)}><CloseOutlined /></Button>
+            <Button className="User-modal-button-wrapper" onClick={() => {onDelete(ele.id);}}><CloseOutlined /></Button>
             </Col>
           </Row>
         </div>

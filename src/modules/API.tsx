@@ -1,27 +1,23 @@
 import axios from "axios";
-let token = sessionStorage.getItem("token");
-
-export const submitInterview = (APICALL: any, body?: any) => {
+export const submitInterview = (APICALL: any, body: any,token:any) => {
   return axios.post(`http://localhost:3333/api/${APICALL}`, body, {
     headers: {
-      Authorization: token
+      Authorization: `Bearer ${token}`
     }
   });
 }
 
-export const getInterview = (APICALL: any) => {
+export const getInterview = (APICALL: any,token:any) => {
   return axios.get(`http://localhost:3333/api/${APICALL}`, {
     headers: {
-      Authorization: token
+      Authorization: `Bearer ${token}`
     }
   });
 }
-
-export const deleteInterview = (APICALL: any,ID: any) => {
-  console.log(token)
+export const deleteInterview = (APICALL: any,ID: any,token:any) => {
   return axios.delete(`http://localhost:3333/api/${APICALL}/${ID}`, {
     headers: {
-      Authorization: token
+      Authorization: `Bearer ${token}`
     }
   });
 }

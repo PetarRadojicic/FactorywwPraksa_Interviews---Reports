@@ -17,7 +17,7 @@ export const UserPanel: React.FC = () => {
 
 
   useEffect(() => {
-    getInterview('candidates')
+    getInterview('candidates',sessionStorage.getItem("token"))
       .then(response => {
         setCandidates(response.data);
       })
@@ -27,7 +27,7 @@ export const UserPanel: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    getInterview('reports')
+    getInterview('reports',sessionStorage.getItem("token"))
       .then(response => {
         setReports(response.data);
       })

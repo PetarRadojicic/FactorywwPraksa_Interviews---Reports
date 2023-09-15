@@ -22,7 +22,7 @@ export const WizardReports: React.FC = () => {
 
 
     useEffect(() => {
-        getInterview('candidates')
+        getInterview('candidates',sessionStorage.getItem("token"))
             .then(response => {
                 setCandidates(response.data);
             })
@@ -32,7 +32,7 @@ export const WizardReports: React.FC = () => {
     }, []);
 
     useEffect(() => {
-        getInterview('companies')
+        getInterview('companies',sessionStorage.getItem("token"))
             .then(response => {
                 setCompanies(response.data);
             })
@@ -77,7 +77,7 @@ export const WizardReports: React.FC = () => {
 
     const handleSubmit = async () => {
         try {
-            await submitInterview('reports', SEND_VALUES_CREATE_REPORT)
+            await submitInterview('reports', SEND_VALUES_CREATE_REPORT,sessionStorage.getItem("token"))
             setChangeWizardStep(4)
             setProgress(100)
         } catch (e) {

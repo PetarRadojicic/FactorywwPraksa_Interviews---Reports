@@ -1,6 +1,7 @@
 import { Button, Row, Form, Input, Col } from 'antd';
 import { useNavigate } from "react-router-dom";
 import { loginAuth } from '../../modules/loginAuth';
+import {nullToken} from '../../modules/token'
 import './Login.scss';
 
 export const Login: React.FC = () => {
