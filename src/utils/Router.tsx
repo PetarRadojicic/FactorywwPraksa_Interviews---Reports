@@ -3,10 +3,13 @@ import { Login } from "../pages/Login/Login";
 import { UsersPanel } from "../pages/UsersPanel/UsersPanel";
 import { UserPanel } from "../pages/UserPanel/UserPanel";
 import { AdminPanel } from "../pages/AdminPanel/AdminPanel";
+import { Footer} from "../pages/Footer/Footer"
+import { Header} from "../pages/Header/Header"
 
 export const Router = () => {
 
     return <>
+        <Header />
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Login />} />
@@ -15,5 +18,6 @@ export const Router = () => {
                 <Route path="/AdminPanel" element={<AdminPanel/>} />
             </Routes>
         </BrowserRouter>
+        <Footer />
     </>
 }

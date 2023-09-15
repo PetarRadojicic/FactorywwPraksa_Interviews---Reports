@@ -30,7 +30,6 @@ export const UsersPanel: React.FC = () => {
 
 
   return <div className='fullWrapper-UsersPanel'>
-    <Divider orientation='center' className="Divider-UsersPanel"><h1>Interviews Report</h1></Divider>
     <Row justify="start" >
       <Col span={4}><h1>Candidates</h1></Col>
       <Col span={4}></Col>
