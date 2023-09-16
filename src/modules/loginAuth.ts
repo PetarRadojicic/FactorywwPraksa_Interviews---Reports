@@ -1,39 +1,33 @@
-import { getToken } from '../modules/token'
-import { getInterview } from '../modules/API'
+import { getToken } from '../modules/token';
+import { getInterview } from '../modules/API';
+import bcrypt from 'bcryptjs';
 
 export const loginAuth = async (username: string, password: string) => {
-    let gettoken = false;
     const response = await getInterview('users', sessionStorage.getItem("token"));
 
+    let send = "";
+
     const user = response.data.find((ele: any) => {
-        if (username === ele.email && password === 'developer') {
+        if (username === ele.email && bcrypt.compareSync(password, ele.password)) {
             if (ele.admin) {
                 const payload = {
                     "email": username,
                     "password": password
                 }
-
-                getToken("token", payload)
-
-                console.log('Admin')
-                gettoken = true;
-                return true;
+                getToken("token", payload);
+                send = "AdminPanel";
             } else {
-                console.log('User')
-                return true;
+                send = "UsersPanel";
             }
         }
-        return false;
     });
 
-    if (user) {
-        if (gettoken) {
-            return "AdminPanel";
-        } else {
-            return "UsersPanel";
-        }
+    if (send === "AdminPanel") {
+        return "AdminPanel";
+    } else if (send === "UsersPanel") {
+        return "UsersPanel";
+    } else {
+        alert('User doesnt exist')
+        return "";
     }
-
-    alert("User doesn't exist")
-    return "";
 }
