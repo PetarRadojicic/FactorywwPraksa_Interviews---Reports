@@ -8,6 +8,7 @@ import { getInterview } from '../../modules/API';
 
 export const WizardReports: React.FC = () => {
     const { Meta } = Card;
+    // unused
     const { RangePicker } = DatePicker;
     const { TextArea } = Input;
 
@@ -48,6 +49,7 @@ export const WizardReports: React.FC = () => {
         setSearch(e.target.value.toLowerCase())
     }
 
+    // this should go into utils folder
     function generateRandomNumber(): number {
         const min = 10000000;
         const max = 99999999;
@@ -63,6 +65,7 @@ export const WizardReports: React.FC = () => {
     const [status, setStatus] = useState('');
     const [note, setNote] = useState('');
 
+    // this should be a builder function in a .service file
     const SEND_VALUES_CREATE_REPORT = {
         "id": generateRandomNumber(),
         "candidateId": candidateId,
@@ -114,7 +117,9 @@ export const WizardReports: React.FC = () => {
 
         </div>
         <Row gutter={[16, 24]}>
-
+{/* ternary chaining is one of the easies ways to ruin your code base */}
+{/* try to think of a different approach that can produce the same result */}
+{/* but in the same time, it also should clear up what exacly is going on in thiese piece of code */}
             {changeWizardStep == 1 ? candidates.map((ele: any) => (
                 ele.name.toLowerCase().startsWith(search) ? (
 

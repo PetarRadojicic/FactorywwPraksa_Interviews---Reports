@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Modal, Card } from 'antd';
 import './UserModal.scss';
 
+// we prefix interface with capital I so we know it reffers to ts interface and not an actual object
 interface AdminProps {
   companyName: string,
   interviewDate: string,
@@ -35,8 +36,11 @@ const tabList = [
   },
 ];
 
+// why would you set the correct interface as function props
+// only to override it with any in the next part of function definition?
 export const UserModal: React.FC<AdminProps> = (props: any): JSX.Element => {
 
+  // unnecessary console.log
  console.log(props)
   const [activeTabKey1, setActiveTabKey1] = useState<string>('tab1');
 
