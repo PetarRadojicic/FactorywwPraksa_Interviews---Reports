@@ -17,6 +17,8 @@ export const UserPanel: React.FC = () => {
 
 
   useEffect(() => {
+    // get interview, and then it does everything but getting intervies
+    // very very bad practice
     getInterview('candidates',sessionStorage.getItem("token"))
       .then(response => {
         setCandidates(response.data);
@@ -25,6 +27,9 @@ export const UserPanel: React.FC = () => {
         console.error('Error fetching interview:', error);
       });
   }, []);
+
+  // two use effects that are triggered in same point of component lifecycle
+  // why not just put it all in one?
 
   useEffect(() => {
     getInterview('reports',sessionStorage.getItem("token"))
@@ -37,6 +42,7 @@ export const UserPanel: React.FC = () => {
   }, []);
 
 
+  // hook calls go to the top of component declaration
   let { id } = useParams();
 
 
@@ -54,6 +60,8 @@ export const UserPanel: React.FC = () => {
     </Row>
     <Divider></Divider>
 
+  {/* This is misleading, you map users, but you just take one user */}
+  {/* You should use .find() for that, but you should also move that out to .service file */}
     {candidates.map((ele: any) => (
       ele.id == id ? (
         <>
@@ -104,6 +112,7 @@ export const UserPanel: React.FC = () => {
             </Col>
             <Col span={2}>
               <Button className="User-modal-button-wrapper" onClick={() => {
+                // you could just use setIsModalOpen(!isModalOpen)
                 { isModalOpen ? setIsModalOpen(false) : setIsModalOpen(true) }
                 setShowModal(<UserModal companyName={ele.companyName} interviewDate={trimDate(ele.interviewDate)} phase={ele.phase} status={ele.status} note={ele.note} close={closeModal} candidateName={ele.candidateName}/>)
               }}><EyeOutlined /></Button>

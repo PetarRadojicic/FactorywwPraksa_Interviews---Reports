@@ -10,7 +10,7 @@
 }
 
 .fullWrapper-UsersPanel {
-    background-color: #999;
+    background-color: #999; //all used colors should be in a _colors.scss file as variables, google scss partials
     color: white;
     margin: 5%;
 }
@@ -22,9 +22,12 @@
 .anticon {
     color: white;
 }
+// ENTER/new line, after every rule block
 .Users-Wrapper{
     margin: 2%;
 }
+// This is a bad naming convention, usually teams decide internally what css naming convention to follow
+// its often either `camelCase` or `kebab-case`
 .Admin-Button-Wrapper{
     height: auto;
     display: flex;

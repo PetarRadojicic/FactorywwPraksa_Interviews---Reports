@@ -38,8 +38,10 @@ export const UsersPanel: React.FC = () => {
     </Row>
     <Divider></Divider>
     <Row gutter={[16, 24]}>
+      {/* this part is again confusing, should at least implement clean code structuring */}
       {candidates.map((ele: any) => (
         ele.name.toLowerCase().startsWith(search) ? (
+          // extract the onClick function into script part of component
           <Card key={ele.id} onClick={() => {
 
             const redirect = `/UserPanel/${ele.id}`
