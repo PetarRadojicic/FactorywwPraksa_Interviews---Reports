@@ -1,6 +1,8 @@
+@import 'colors';
+
 .Filler-Row {
   height: 40vh;
-  background-color: #999;
+  background-color: $primary-color;
 }
 
 .Content-Row {
@@ -9,7 +11,7 @@
 
 .Row-Input {
   width: 100%;
-  background-color: #888  ;
+  background-color: $secondary-color  ;
 }
 
 .Row-Input-Username {
@@ -21,12 +23,12 @@
 }
 
 .ant-form-item .ant-form-item-label>label {
-  color: white;
+  color: $light-color;
   font-size: larger;
 }
 
 .Submit{
   height: 25%;
   font-size: x-large;
-  background-color:#999
+  background-color:$primary-color
 }

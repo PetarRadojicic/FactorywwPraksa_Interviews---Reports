@@ -1,8 +1,9 @@
 import { Input, Divider, Row, Card, Col } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
-import { getInterview } from '../../modules/API';
+import { getUserData } from '../../utils/API';
 import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
+import { checkSearch } from '../../services/checkSearch';
 import './UsersPanel.scss';
 
 const { Meta } = Card;
@@ -19,7 +20,7 @@ export const UsersPanel: React.FC = () => {
   const [candidates, setCandidates] = useState([]);
 
   useEffect(() => {
-    getInterview('candidates', sessionStorage.getItem("token"))
+    getUserData('candidates', sessionStorage.getItem("token"))
       .then(response => {
         setCandidates(response.data);
       })
@@ -43,7 +44,7 @@ export const UsersPanel: React.FC = () => {
     <Divider></Divider>
     <Row gutter={[16, 24]}>
       {candidates.map((ele: any) => (
-        ele.name.toLowerCase().startsWith(search) ? (
+        checkSearch(ele.name,search) ? (
           <Card key={ele.id} onClick={() => { handleNavigate(ele.id) }} className="usersCard"
             hoverable
             cover={<img className="imgCard" src={ele.avatar} />}

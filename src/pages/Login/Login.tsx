@@ -1,7 +1,7 @@
 import { Button, Row, Form, Input, Col } from 'antd';
 import { useNavigate } from "react-router-dom";
 import { loginAuth } from '../../modules/loginAuth';
-import './Login.scss';
+import '../../ScssPartials/Login.scss';
 
 type FieldType = {
     username: string;
@@ -14,7 +14,6 @@ export const Login: React.FC = () => {
     const onFinish = async (values: any) => {
         try {
             const redirect: string = await loginAuth(values.username, values.password);
-            console.log(redirect)
             navigate(redirect);
         }
         catch (e) {
@@ -23,13 +22,10 @@ export const Login: React.FC = () => {
     };
     
     return <>
-
-        {/* idendation should be 2 spaces */}
         <Form
             onFinish={onFinish}
             className='Form'
         >
-
             <Row className='Filler-Row'></Row>
             <Row className='Content-Row'>
                 <Row className='Row-Input Row-Input-Username'>

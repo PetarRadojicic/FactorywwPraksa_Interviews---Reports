@@ -1,9 +1,9 @@
 import bcrypt from 'bcryptjs';
-import { getInterview } from '../modules/API';
-import { getToken } from '../modules/token';
+import { getUserData } from '../utils/API';
+import { getToken } from '../utils/token';
 
 export const loginAuth = async (username: string, password: string) => {
-    const response = await getInterview('users', sessionStorage.getItem("token"));
+    const response = await getUserData('users', sessionStorage.getItem("token"));
 
     let send = "";
 

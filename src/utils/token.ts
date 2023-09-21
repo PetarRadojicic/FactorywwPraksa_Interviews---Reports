@@ -1,7 +1,7 @@
-import {postInterview} from './API'
+import {postUserData} from './API'
 
 export const getToken = async (set:string,payload:{}) => {
-    postInterview(payload).then(response => {
+  postUserData(payload).then(response => {
         sessionStorage.setItem(set,response.data.accessToken);
       })
 }

@@ -1,11 +1,12 @@
 import { Divider, Row, Col, Button, Card } from 'antd';
 import { EyeOutlined } from '@ant-design/icons';
-import { getInterview } from '../../modules/API'
+import { getUserData } from '../../utils/API'
 import { trimDate } from '../../services/trimDate'
 import { useState, useEffect } from 'react';
 import './UserPanel.scss';
 import { useParams, } from "react-router-dom"
 import { UserModal } from '../UserModal/UserModal'
+import {findUser} from '../../services/findUser'
 
 export const UserPanel: React.FC = () => {
   let { id } = useParams();
@@ -15,12 +16,12 @@ export const UserPanel: React.FC = () => {
   const { Meta } = Card;
   const [candidates, setCandidates] = useState([]);
   const [reports, setReports] = useState([]);
+  const [foundUser, setFoundUser] = useState<any>({});
+
 
 
   useEffect(() => {
-    // get interview, and then it does everything but getting intervies
-    // very very bad practice
-    getInterview('candidates', sessionStorage.getItem("token"))
+    getUserData('candidates', sessionStorage.getItem("token"))
       .then(response => {
         setCandidates(response.data);
       })
@@ -28,7 +29,7 @@ export const UserPanel: React.FC = () => {
         console.error('Error fetching interview:', error);
       });
 
-    getInterview('reports', sessionStorage.getItem("token"))
+    getUserData('reports', sessionStorage.getItem("token"))
       .then(response => {
         setReports(response.data);
       })
@@ -41,6 +42,10 @@ export const UserPanel: React.FC = () => {
     setIsModalOpen(false)
   }
 
+  useEffect(() => {
+    setFoundUser(findUser(candidates,id));
+  }, [candidates, id]);
+
   return <div className="fullWrapper">
     {isModalOpen ? showModal : null}
     <Row justify="center">
@@ -50,37 +55,30 @@ export const UserPanel: React.FC = () => {
       <Button className="Button" href="/UsersPanel">Candidates</Button>
     </Row>
     <Divider></Divider>
-
-    {/* This is misleading, you map users, but you just take one user */}
-    {/* You should use .find() for that, but you should also move that out to .service file */}
-    {candidates.map((ele: any) => (
-      ele.id == id ? (
-        <>
-          <Row gutter={16} className='UserInfoContainer'>
-            <Col span={8}>
-              <Card
-                className="UserInfoContainer-Profile"
-                hoverable
-                cover={<img alt="example" src={ele.avatar} />}
-              >
-                <Meta description="Name" title={ele.name} />
-              </Card>
-            </Col>
-            <Col span={8}>
-              <Card className="UserInfoContainer-Card">
-                <Meta description="Email" title={ele.name} />
-              </Card>
-              <Card className="UserInfoContainer-Card">
-                <Meta description="Date of birth" title={trimDate(ele.birthday)} />
-              </Card>
-              <Card className="UserInfoContainer-Card">
-                <Meta description="Education" title={ele.education} />
-              </Card>
-            </Col>
-          </Row>
-        </>
-      ) : null
-    ))}
+    {foundUser ? <>
+<Row gutter={16} className='UserInfoContainer'>
+  <Col span={8}>
+    <Card
+      className="UserInfoContainer-Profile"
+      hoverable
+      cover={<img alt="example" src={foundUser.avatar} />}
+    >
+      <Meta description="Name" title={foundUser.name} />
+    </Card>
+  </Col>
+  <Col span={8}>
+    <Card className="UserInfoContainer-Card">
+      <Meta description="Email" title={foundUser.name} />
+    </Card>
+    <Card className="UserInfoContainer-Card">
+      <Meta description="Date of birth" title={foundUser.birthday} />
+    </Card>
+    <Card className="UserInfoContainer-Card">
+      <Meta description="Education" title={foundUser.education} />
+    </Card>
+  </Col>
+</Row>
+</>: null}
     <Divider orientation='left'><h1>Reports</h1></Divider>
     {reports.map((ele: any) => (
       ele.candidateId == id ? (
@@ -103,7 +101,7 @@ export const UserPanel: React.FC = () => {
             </Col>
             <Col span={2}>
               <Button className="User-modal-button-wrapper" onClick={() => {
-                {setIsModalOpen(!isModalOpen)}
+                { setIsModalOpen(!isModalOpen) }
                 setShowModal(<UserModal companyName={ele.companyName} interviewDate={trimDate(ele.interviewDate)} phase={ele.phase} status={ele.status} note={ele.note} close={closeModal} candidateName={ele.candidateName} />)
               }}><EyeOutlined /></Button>
             </Col>

@@ -1,5 +1,5 @@
 import axios from "axios";
-export const submitInterview = (APICALL: any, body: any,token:any) => {
+export const submitUserData = (APICALL: any, body: any,token:any) => {
   return axios.post(`http://localhost:3333/api/${APICALL}`, body, {
     headers: {
       Authorization: `Bearer ${token}`
@@ -7,14 +7,14 @@ export const submitInterview = (APICALL: any, body: any,token:any) => {
   });
 }
 
-export const getInterview = (APICALL: any,token:any) => {
+export const getUserData = (APICALL: any,token:any) => {
   return axios.get(`http://localhost:3333/api/${APICALL}`, {
     headers: {
       Authorization: `Bearer ${token}`
     }
   });
 }
-export const deleteInterview = (APICALL: any,ID: any,token:any) => {
+export const deleteUserData = (APICALL: any,ID: any,token:any) => {
   return axios.delete(`http://localhost:3333/api/${APICALL}/${ID}`, {
     headers: {
       Authorization: `Bearer ${token}`
@@ -22,6 +22,6 @@ export const deleteInterview = (APICALL: any,ID: any,token:any) => {
   });
 }
 
-export const postInterview = (Payload:any) => {
+export const postUserData = (Payload:any) => {
   return axios.post(`http://localhost:3333/login`,Payload);
 }
