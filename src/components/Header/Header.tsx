@@ -1,4 +1,4 @@
-import './Header.scss';
+import '../../ScssPartials/Header.scss';
 
 export const Header = () => {
 

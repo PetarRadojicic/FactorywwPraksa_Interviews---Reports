@@ -1,34 +1,46 @@
 @import 'colors';
 
-.Filler-Row {
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.loginFormFiller {
   height: 40vh;
   background-color: $primary-color;
 }
 
-.Content-Row {
+.loginFormContent {
   height: 20vh;
 }
 
-.Row-Input {
+.loginFormRowInput {
   width: 100%;
-  background-color: $secondary-color  ;
+  background-color: $secondary-color;
 }
 
-.Row-Input-Username {
+.loginFormRowInputUsername {
   padding-top: 2vh;
 }
 
-.Row-BUtton {
+.loginFormRowInputPassword {
+  padding-bottom: 2vh;
+}
+
+.loginFormRowInputButton {
   width: 100%;
 }
 
-.ant-form-item .ant-form-item-label>label {
+.loginFormLabel {
   color: $light-color;
   font-size: larger;
 }
 
-.Submit{
+.loginFormSubmit {
   height: 25%;
   font-size: x-large;
-  background-color:$primary-color
+  background-color: $primary-color;
 }

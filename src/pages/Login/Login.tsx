@@ -20,17 +20,13 @@ export const Login: React.FC = () => {
             console.log('Failed:', e);
         }
     };
-    
+
     return <>
-        <Form
-            onFinish={onFinish}
-            className='Form'
-        >
-            <Row className='Filler-Row'></Row>
-            <Row className='Content-Row'>
-                <Row className='Row-Input Row-Input-Username'>
-                    <Col xs={2} sm={4} md={6} lg={6} xl={6}>
-                    </Col>
+        <Form onFinish={onFinish} className='loginForm'>
+            <Row className='loginFormFiller'></Row>
+            <Row className='loginFormContent'>
+                <Row className='loginFormRowInput loginFormRowInputUsername'>
+                    <Col xs={2} sm={4} md={6} lg={6} xl={6}></Col>
                     <Col xs={20} sm={16} md={12} lg={12} xl={12}>
                         <Form.Item<FieldType>
                             label="Username"
@@ -40,39 +36,34 @@ export const Login: React.FC = () => {
                             <Input />
                         </Form.Item>
                     </Col>
-                    <Col xs={2} sm={4} md={6} lg={6} xl={6}>
-                    </Col>
+                    <Col xs={2} sm={4} md={6} lg={6} xl={6}></Col>
                 </Row>
-                <Row className='Row-Input Row-Input-Password'>
-                    <Col xs={2} sm={4} md={6} lg={6} xl={6}>
-                    </Col>
+                <Row className='loginFormRowInput loginFormRowInputPassword'>
+                    <Col xs={2} sm={4} md={6} lg={6} xl={6}></Col>
                     <Col xs={20} sm={16} md={12} lg={12} xl={12}>
                         <Form.Item<FieldType>
-                            label="password"
+                            label="Password"
                             name="password"
                             rules={[{ required: true, message: 'Please input your Password!' }]}
                         >
-                            <Input />
+                            <Input.Password />
                         </Form.Item>
                     </Col>
-                    <Col xs={2} sm={4} md={6} lg={6} xl={6}>
-                    </Col>
+                    <Col xs={2} sm={4} md={6} lg={6} xl={6}></Col>
                 </Row>
-                <Row className='Row-Input Row-Input-button'>
-                    <Col xs={6} sm={6} md={6} lg={6} xl={6}>
-                    </Col>
+                <Row className='loginFormRowInput loginFormRowInputButton'>
+                    <Col xs={6} sm={6} md={6} lg={6} xl={6}></Col>
                     <Col xs={16} sm={16} md={16} lg={16} xl={16}>
                         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                            <Button className='Submit' type="primary" htmlType="submit">
+                            <Button className='loginFormSubmit' type="primary" htmlType="submit">
                                 Submit
                             </Button>
                         </Form.Item>
                     </Col>
-                    <Col xs={6} sm={6} md={6} lg={6} xl={6}>
-                    </Col>
+                    <Col xs={6} sm={6} md={6} lg={6} xl={6}></Col>
                 </Row>
             </Row>
-            <Row className='Filler-Row'></Row>
+            <Row className='loginFormFiller'></Row>
         </Form>
     </>
         ;

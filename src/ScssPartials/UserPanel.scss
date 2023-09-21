@@ -1,0 +1,79 @@
+@import 'colors';
+
+.user-panel-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  width: 15%;
+  margin-top: 15px;
+  background-color: $secondary-color;
+  color: $light-color;
+}
+
+.bg-img {
+  width: 100%;
+  height: 100%;
+  background-color: $light-color;
+}
+
+.table {
+  margin-top: 5%;
+}
+
+.user-card-container {
+  text-align: center;
+  margin: 5%;
+}
+
+.full-wrapper {
+  background-color: $primary-color;
+  color: $light-color;
+}
+
+.user-panel-wrapper {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 1%;
+  padding: 2%;
+  background-color: $light-color;
+}
+
+.user-modal-button-wrapper .anticon {
+  font-size: xx-large;
+  color: $dark-color;
+}
+
+.user-modal-button-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.user-info-container {
+  background-color: $light-color;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.user-info-container-card {
+  height: auto;
+  width: 100%;
+  margin: 10%;
+}
+
+.user-info-container-profile {
+  width: 100%;
+  margin: 10%;
+  height: auto;
+}
+
+.ant-card-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

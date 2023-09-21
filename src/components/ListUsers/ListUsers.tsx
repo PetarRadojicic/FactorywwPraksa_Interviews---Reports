@@ -2,7 +2,7 @@ import react, { useState } from 'react';
 
 import { CloseOutlined, EyeOutlined } from '@ant-design/icons';
 import { Button, Card, Col,Row } from 'antd';
-import '../../pages/AdminPanel/AdminPanel.scss';
+import '../../ScssPartials/ListUsers.scss';
 
 interface IModalValues {
     id: number;
@@ -18,11 +18,11 @@ interface IModalValues {
   }
 
 export const ListUsers = (props:IModalValues) => {
-    return <div className="UserPanelWrraper" key={props.id}>
+    return <div className="listPanelwrraper" key={props.id}>
     <Row gutter={1} key={props.id}>
       <Col span={5}>
         <Card
-          className="ADmin-Single"
+          className="listCard"
           title="Company"
           bordered={false}
         >
@@ -31,7 +31,7 @@ export const ListUsers = (props:IModalValues) => {
       </Col>
       <Col span={5}>
         <Card
-          className="ADmin-Single"
+          className="listCard"
           title="Interview Date"
           bordered={false}
         >
@@ -40,7 +40,7 @@ export const ListUsers = (props:IModalValues) => {
       </Col>
       <Col span={6}>
         <Card
-          className="ADmin-Single"
+          className="listCard"
           title="Candidate Name"
           bordered={false}
         >
@@ -49,7 +49,7 @@ export const ListUsers = (props:IModalValues) => {
       </Col>
       <Col span={4}>
         <Card
-          className="ADmin-Single"
+          className="listCard"
           title="Status"
           bordered={false}
         >
@@ -58,7 +58,7 @@ export const ListUsers = (props:IModalValues) => {
       </Col>
       <Col span={2}>
         <Button
-          className="User-modal-button-wrapper"
+          className="listModalButtonWrapper"
           onClick={() => props.handleModal()}
         >
           <EyeOutlined />
@@ -66,7 +66,7 @@ export const ListUsers = (props:IModalValues) => {
       </Col>
       <Col span={2}>
         <Button
-          className="User-modal-button-wrapper"
+          className="listModalButtonWrapper"
           onClick={() => {
             props.onDelete();
           }}

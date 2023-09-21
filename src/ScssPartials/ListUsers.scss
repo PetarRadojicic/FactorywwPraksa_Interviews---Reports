@@ -1,0 +1,28 @@
+@import 'colors';
+
+.listCard {
+  height: 100%;
+  width: 100%;
+}
+
+.listModalButtonWrapper .anticon {
+  font-size: xx-large;
+  color: $dark-color;
+}
+
+.listModalButtonWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.listPanelwrraper {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 1%;
+  padding: 2%;
+  background-color: $light-color;
+}

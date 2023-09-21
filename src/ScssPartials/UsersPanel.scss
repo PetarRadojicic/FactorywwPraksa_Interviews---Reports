@@ -1,0 +1,31 @@
+@import 'colors';
+
+.users-panel-card {
+    width: 250px;
+    height: 500px;
+    margin: auto;
+}
+
+.users-panel-search-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.users-panel-wrapper {
+    background-color: $primary-color;
+    color: $light-color;
+    margin: 5%;
+}
+
+.ant-divider-horizontal.ant-divider-with-text {
+    color: $light-color;
+}
+
+.anticon {
+    color: $light-color;
+}
+
+.users-panel-img {
+    width: 100%;
+    height: auto;
+}

@@ -3,8 +3,9 @@ import { Button, Card, DatePicker, Divider, Form, Input, Progress, Row, Select }
 import { Dayjs } from 'dayjs';
 import React, { useEffect, useState } from 'react';
 import { getUserData, submitUserData } from '../../utils/API';
-import './WizardReports.scss';
+import '../../ScssPartials/WizardReports.scss';
 import { userBuilder } from '../../services/userBuilder';
+
 
 export const WizardReports: React.FC = () => {
     const { Meta } = Card;
@@ -75,15 +76,15 @@ export const WizardReports: React.FC = () => {
                     setTitle('SelectCandidate')
                     setCandidateId(ele.id)
 
-                }} className="usersCard"
+                }} className="usersPanelCard"
                     hoverable
-                    cover={<img className="imgCard" src={ele.avatar} />}
+                    cover={<img src={ele.avatar} />}
                 >
                     <Meta title={ele.name} description={ele.email} />
                 </Card>
             ) : null
         ))
-    };
+    }
 
     const renderStep2 = () => {
         return companies.map((ele: any) => (
@@ -96,7 +97,7 @@ export const WizardReports: React.FC = () => {
                     setChangeWizardStep(3)
                     setTitle('Fill Report Detail')
                     setCompanyId(ele.id)
-                }} className="Step2-usersCard"
+                }} className="step2UsersCard"
                     hoverable
                 >
                     <Meta title={ele.name} />
@@ -108,12 +109,12 @@ export const WizardReports: React.FC = () => {
     const renderStep3 = () => {
         return (
             <>
-                <Form className="InputWrapperReport">
-                    <Form.Item label="InterView Date" className="SinleInputdate">
-                        <DatePicker className="SinleInputdate" onChange={date => setInterviewDate(date)} />
+                <Form className="inputWrapperReport">
+                    <Form.Item label="InterView Date" className="inputWrapper">
+                        <DatePicker className="inputs" onChange={date => setInterviewDate(date)} />
                     </Form.Item>
                     <Divider></Divider>
-                    <Form.Item label="Phase" className="SinleInput" rules={[{ required: true, message: 'Please input your username!' }]}>
+                    <Form.Item label="Phase" className="inputs" rules={[{ required: true, message: 'Please input your username!' }]}>
                         <Select onChange={value => setPhase(value)}>
                             <Select.Option value="hr">hr</Select.Option>
                             <Select.Option value="cv">cv</Select.Option>
@@ -121,50 +122,48 @@ export const WizardReports: React.FC = () => {
                         </Select>
                     </Form.Item>
                     <Divider></Divider>
-                    <Form.Item label="Status" className="SinleInput">
+                    <Form.Item label="Status" className="inputs">
                         <Select onChange={value => setStatus(value)}>
                             <Select.Option value="passed">passed</Select.Option>
                             <Select.Option value="declined">declined</Select.Option>
                         </Select>
                     </Form.Item>
                     <Divider></Divider>
-                    <Form.Item label="Notes" className="SinleInput">
+                    <Form.Item label="Notes" className="inputs">
                         <Input.TextArea rows={4} onChange={e => setNote(e.target.value)} />
                     </Form.Item>
                     <Divider></Divider>
-                    <Button className="BtnSinleInput" onClick={handleSubmit}>Submit</Button>
+                    <Button className="buttonSubmit" onClick={handleSubmit}>Submit</Button>
                 </Form>
 
             </>
         )
-    };
+    }
 
     const renderStep4 = () => {
         return (
-            <Button href='/AdminPanel' className='goBack'>GoBack</Button>
+            <Button href='/AdminPanel' className='buttonBack'>GoBack</Button>
         )
     }
 
     return <>
-        <div className='searcahADminCOntainer'>
-            <Input onChange={searchSurname} className="searchInput-AdminPanel" addonBefore={<SearchOutlined />} placeholder="Search" />
+        <div className='searchInputContainer'>
+            <Input onChange={searchSurname} className="searchInput" addonBefore={<SearchOutlined />} placeholder="Search" />
         </div>
         <div className='percent'>
             <Progress percent={progress} />
         </div>
         <Divider><h1>{Title}</h1></Divider>
 
-        <div className='CardSelectorContainer'>
-            <Card loading={loading} className='CardSelector'>
+        <div className='selectedContainer'>
+            <Card loading={loading} className='selected'>
                 <Meta
-                    className='CardSelector'
                     title="Candidate"
                     description={candidateName}
                 />
             </Card>
-            <Card loading={loading2} className='CardSelector'>
+            <Card loading={loading2} className='selected'>
                 <Meta
-                    className='CardSelector'
                     title="company"
                     description={companyName}
                 />

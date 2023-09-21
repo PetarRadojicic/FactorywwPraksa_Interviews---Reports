@@ -3,10 +3,10 @@ import { EyeOutlined } from '@ant-design/icons';
 import { getUserData } from '../../utils/API'
 import { trimDate } from '../../services/trimDate'
 import { useState, useEffect } from 'react';
-import './UserPanel.scss';
+import '../../ScssPartials/UserPanel.scss';
 import { useParams, } from "react-router-dom"
 import { UserModal } from '../UserModal/UserModal'
-import {findUser} from '../../services/findUser'
+import { findUser } from '../../services/findUser'
 
 export const UserPanel: React.FC = () => {
   let { id } = useParams();
@@ -17,8 +17,6 @@ export const UserPanel: React.FC = () => {
   const [candidates, setCandidates] = useState([]);
   const [reports, setReports] = useState([]);
   const [foundUser, setFoundUser] = useState<any>({});
-
-
 
   useEffect(() => {
     getUserData('candidates', sessionStorage.getItem("token"))
@@ -43,46 +41,46 @@ export const UserPanel: React.FC = () => {
   }
 
   useEffect(() => {
-    setFoundUser(findUser(candidates,id));
+    setFoundUser(findUser(candidates, id));
   }, [candidates, id]);
 
-  return <div className="fullWrapper">
+  return <div className="full-wrapper">
     {isModalOpen ? showModal : null}
     <Row justify="center">
       <Col span={6}><h1>Interviews Report</h1></Col>
       <Col span={4}></Col>
       <Col span={4}></Col>
-      <Button className="Button" href="/UsersPanel">Candidates</Button>
+      <Button className="user-panel-button" href="/UsersPanel">Candidates</Button>
     </Row>
     <Divider></Divider>
     {foundUser ? <>
-<Row gutter={16} className='UserInfoContainer'>
-  <Col span={8}>
-    <Card
-      className="UserInfoContainer-Profile"
-      hoverable
-      cover={<img alt="example" src={foundUser.avatar} />}
-    >
-      <Meta description="Name" title={foundUser.name} />
-    </Card>
-  </Col>
-  <Col span={8}>
-    <Card className="UserInfoContainer-Card">
-      <Meta description="Email" title={foundUser.name} />
-    </Card>
-    <Card className="UserInfoContainer-Card">
-      <Meta description="Date of birth" title={foundUser.birthday} />
-    </Card>
-    <Card className="UserInfoContainer-Card">
-      <Meta description="Education" title={foundUser.education} />
-    </Card>
-  </Col>
-</Row>
-</>: null}
+      <Row gutter={16} className='user-info-container'>
+        <Col span={8}>
+          <Card
+            className="user-info-container-profile"
+            hoverable
+            cover={<img alt="example" src={foundUser.avatar} />}
+          >
+            <Meta description="Name" title={foundUser.name} />
+          </Card>
+        </Col>
+        <Col span={8}>
+          <Card className="user-info-container-card">
+            <Meta description="Email" title={foundUser.name} />
+          </Card>
+          <Card className="user-info-container-card">
+            <Meta description="Date of birth" title={foundUser.birthday} />
+          </Card>
+          <Card className="user-info-container-card">
+            <Meta description="Education" title={foundUser.education} />
+          </Card>
+        </Col>
+      </Row>
+    </> : null}
     <Divider orientation='left'><h1>Reports</h1></Divider>
     {reports.map((ele: any) => (
       ele.candidateId == id ? (
-        <div className="UserPanelWrraper" key={ele.id}>
+        <div className="user-panel-wrapper" key={ele.id}>
           <Row gutter={1} key={ele.id}>
             <Col span={9}>
               <Card title="Company" bordered={false}>
@@ -100,7 +98,7 @@ export const UserPanel: React.FC = () => {
               </Card>
             </Col>
             <Col span={2}>
-              <Button className="User-modal-button-wrapper" onClick={() => {
+              <Button className="user-modal-button-wrapper" onClick={() => {
                 { setIsModalOpen(!isModalOpen) }
                 setShowModal(<UserModal companyName={ele.companyName} interviewDate={trimDate(ele.interviewDate)} phase={ele.phase} status={ele.status} note={ele.note} close={closeModal} candidateName={ele.candidateName} />)
               }}><EyeOutlined /></Button>
@@ -111,4 +109,3 @@ export const UserPanel: React.FC = () => {
     ))}
   </div>
 }
-

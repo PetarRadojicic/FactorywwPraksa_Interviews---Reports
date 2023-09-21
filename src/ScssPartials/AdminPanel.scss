@@ -1,0 +1,118 @@
+@import 'colors';
+
+.adminPanelCard {
+  width: 250px;
+  margin: auto;
+}
+
+.adminPanelSearchInput {
+  width: 55%;
+  margin-bottom: 5%;
+}
+
+.adminPanelWrapper {
+  background-color: $primary-color;
+  color: $light-color;
+  margin: 5%;
+}
+
+.adminPanelDivider {
+  color: $light-color;
+}
+
+.anticon {
+  color: $light-color;
+}
+
+.adminPanelUsersWrapper {
+  margin: 2%;
+}
+
+.adminPanelButtonWrapper {
+  height: auto;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.adminPanelButtonWrapper .anticon {
+  color: $dark-color;
+}
+
+.adminPanelReportCard {
+  display: flex;
+  flex-wrap: wrap;
+  height: auto;
+  width: 40%;
+  margin: 5%;
+}
+
+.adminPanelReportWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  flex-wrap: nowrap;
+  margin: 5%;
+}
+
+.adminPanelControlCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  flex-wrap: nowrap;
+  margin: 5%;
+}
+
+.adminPanelControlImg {
+  width: 100%;
+  height: 300px;
+}
+
+.adminPanelButtonWrapper .anticon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: $dark-color;
+}
+
+.adminPanelButton {
+  width: 100%;
+  height: 100;
+}
+
+.adminPanelUserInfoContainer {
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 768px) {
+  .adminPanelReportCard .adminPanelImg {
+    width: auto;
+    height: auto;
+  }
+}
+
+.adminPanelSingle {
+  height: 100%;
+  width: 100%;
+}
+
+.adminPanelView {
+  width: 50%;
+}
+
+.adminPanelViewContainer {
+  display: flex;
+  width: 100%;
+}
+
+.adminPanelSearchContainer {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+}
