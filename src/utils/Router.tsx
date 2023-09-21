@@ -1,11 +1,11 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-// we tend to seperate node_modules imports from our local imports
+
 import { Login } from "../pages/Login/Login";
 import { UsersPanel } from "../pages/UsersPanel/UsersPanel";
 import { UserPanel } from "../pages/UserPanel/UserPanel";
 import { AdminPanel } from "../pages/AdminPanel/AdminPanel";
-import { Footer} from "../pages/Footer/Footer"
-import { Header} from "../pages/Header/Header"
+import { Footer} from "../components/Footer/Footer"
+import { Header} from "../components/Header/Header"
 
 export const Router = () => {
 

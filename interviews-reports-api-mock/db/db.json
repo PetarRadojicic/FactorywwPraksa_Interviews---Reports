@@ -121,28 +121,6 @@
       "note": "Vivamus a dolor non augue dapibus molestie sed et tortor. Phasellus eu tellus et enim vehicula semper quis sit amet justo. Nunc dictum malesuada ligula sit amet facilisis. "
     },
     {
-      "id": 31297837,
-      "candidateId": 54493806,
-      "candidateName": "Tiffany Lynch",
-      "companyId": 8458231,
-      "companyName": "Facebook",
-      "interviewDate": "Sun Aug 29 2021 07:15:32 GMT+0200 (Central European Summer Time)",
-      "phase": "final",
-      "status": "passed",
-      "note": "Ipsa tempore alias. Iste tenetur est dolor aliquid exercitationem dolor placeat ipsum sequi. Repellendus fugit libero."
-    },
-    {
-      "id": 31297836,
-      "candidateId": 54493806,
-      "candidateName": "Tiffany Lynch",
-      "companyId": 8458231,
-      "companyName": "Facebook",
-      "interviewDate": "Sun Aug 28 2021 17:22:41 GMT+0200 (Central European Summer Time)",
-      "phase": "tech",
-      "status": "passed",
-      "note": "Ipsa tempore alias. Iste tenetur est dolor aliquid exercitationem dolor placeat ipsum sequi. Repellendus fugit libero."
-    },
-    {
       "id": 31297835,
       "candidateId": 54493806,
       "candidateName": "Tiffany Lynch",
@@ -594,6 +572,17 @@
       "candidateId": 38097373,
       "companyId": 73143881,
       "id": 91627252
+    },
+    {
+      "id": 81317591,
+      "candidateId": 56479186,
+      "candidateName": "Declan Schaden",
+      "companyId": 73143881,
+      "companyName": "Google",
+      "interviewDate": null,
+      "phase": "",
+      "status": "",
+      "note": ""
     }
   ],
   "users": [

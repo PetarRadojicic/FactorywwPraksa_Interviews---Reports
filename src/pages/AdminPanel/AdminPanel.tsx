@@ -1,33 +1,34 @@
-import { Input, Divider, Row, Card, Col, Button, Radio } from 'antd';
-import { EyeOutlined, SearchOutlined, CloseOutlined } from '@ant-design/icons';
-import { getInterview, deleteInterview } from '../../modules/API';
-import { useState, useEffect } from 'react';
+import { CloseOutlined, EyeOutlined, SearchOutlined } from '@ant-design/icons';
+import { Button, Card, Col, Divider, Input, Radio, Row } from 'antd';
+import { useEffect, useState } from 'react';
+import { deleteInterview, getInterview } from '../../modules/API';
 import { UserModal } from '../UserModal/UserModal';
-import './AdminPanel.scss';
-import { trimDate } from '../../modules/trimDate';
 import { WizardReports } from '../WizardReports/WizardReports';
+import './AdminPanel.scss';
 
-// Unused component remove from code
-const { Meta } = Card;
+interface ModalValues {
+  id: number;
+  companyName: string;
+  interviewDate: string;
+  phase: number;
+  status: number;
+  note: string;
+  close: () => void;
+  candidateName: string;
+}
 
 export const AdminPanel: React.FC = () => {
-  //no enter is required after opening block of code
-  let [mode, setmode] = useState('Reports'); // useState should always be used with const keyword
+  const [mode, setmode] = useState('Reports');
   const [isModalOpen, setIsModalOpen] = useState(false);
-  // wrong implementation, once again, we have talked about not seting components into state
-  const [showModal, setShowModal] = useState(<></>);
+  const [reportsValueModal, setReportsValueModal] = useState({} as ModalValues);
   const [reports, setReports] = useState([]);
-  // what is RE? bad naming, fellow colegues will never understand what this piece of code is for
-  const [RE, setRE] = useState(1);
-  // no enter for no reason, we always have a row of space after closing block of code,
-  // or when we want to visually annotate that some lines of codes are grouped together for a reason
+  const [Reload, setReload] = useState(1);
   const [search, setSearch] = useState('');
-  const searchSurname = (e: any) => {
-    // dont use any unless you have no other option
-    // lookup docs to see what are ANT callback function types
+
+  const searchSurname = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value.toLowerCase());
   };
-  // enter because of end of codeblock
+
   const closeModal = () => {
     setIsModalOpen(false);
   };
@@ -40,11 +41,11 @@ export const AdminPanel: React.FC = () => {
       .catch((error) => {
         console.error('Error fetching interview:', error);
       });
-  }, [RE]);
+  }, [Reload]);
 
   const onDelete = async (values: any) => {
     deleteReport(values);
-    setRE(RE + 1);
+    setReload(Reload + 1);
   };
 
   const deleteReport = async (id: any) => {
@@ -55,9 +56,28 @@ export const AdminPanel: React.FC = () => {
     }
   };
 
+  const handleModal = (ele: ModalValues) => {
+    setReportsValueModal(ele)
+    {
+      isModalOpen
+        ? setIsModalOpen(false)
+        : setIsModalOpen(true);
+    }
+  }
+
   return (
     <>
-      {isModalOpen ? showModal : null}
+      {isModalOpen && (
+        <UserModal
+          companyName={reportsValueModal.companyName}
+          interviewDate={reportsValueModal.interviewDate}
+          phase={reportsValueModal.phase}
+          status={reportsValueModal.status}
+          note={reportsValueModal.note}
+          close={closeModal}
+          candidateName={reportsValueModal.candidateName}
+        />
+      )}
       <Divider orientation="center" className="Divider-UsersPanel">
         <h1>Reports Administration</h1>
         <Radio.Group
@@ -86,9 +106,9 @@ export const AdminPanel: React.FC = () => {
         <></>
       )}
       {mode == 'Reports' ? (
-        // wrong ANY type
-        reports.map((ele: any) =>
-        // this check should go into service file
+        reports.map((ele: ModalValues) =>
+
+          // this check should go into service file
           ele.candidateName.toLowerCase().startsWith(search) ? (
             // This all should be a component for itself
             <div className="UserPanelWrraper" key={ele.id}>
@@ -132,26 +152,7 @@ export const AdminPanel: React.FC = () => {
                 <Col span={2}>
                   <Button
                     className="User-modal-button-wrapper"
-                    // you should always tend to extract eventHandler functions to
-                    // script part of component, then only reference them in JSX
-                    onClick={() => {
-                      {
-                        isModalOpen
-                          ? setIsModalOpen(false)
-                          : setIsModalOpen(true);
-                      }
-                      setShowModal(
-                        <UserModal
-                          companyName={ele.companyName}
-                          interviewDate={trimDate(ele.interviewDate)}
-                          phase={ele.phase}
-                          status={ele.status}
-                          note={ele.note}
-                          close={closeModal}
-                          candidateName={ele.candidateName}
-                        />
-                      );
-                    }}
+                    onClick={() => handleModal({...ele, close: () => {}})}
                   >
                     <EyeOutlined />
                   </Button>

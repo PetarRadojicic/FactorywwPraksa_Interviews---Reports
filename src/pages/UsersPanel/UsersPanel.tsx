@@ -1,7 +1,7 @@
-import { Input, Divider, Row, Card, Space, Col } from 'antd';
+import { Input, Divider, Row, Card, Col } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import { getInterview } from '../../modules/API';
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import './UsersPanel.scss';
 
@@ -19,7 +19,7 @@ export const UsersPanel: React.FC = () => {
   const [candidates, setCandidates] = useState([]);
 
   useEffect(() => {
-    getInterview('candidates',sessionStorage.getItem("token"))
+    getInterview('candidates', sessionStorage.getItem("token"))
       .then(response => {
         setCandidates(response.data);
       })
@@ -28,6 +28,10 @@ export const UsersPanel: React.FC = () => {
       });
   }, []);
 
+  const handleNavigate = (id: any) => {
+    const redirect = `/UserPanel/${id}`
+    navigate(redirect);
+  }
 
   return <div className='fullWrapper-UsersPanel'>
     <Row justify="start" >
@@ -38,19 +42,11 @@ export const UsersPanel: React.FC = () => {
     </Row>
     <Divider></Divider>
     <Row gutter={[16, 24]}>
-      {/* this part is again confusing, should at least implement clean code structuring */}
       {candidates.map((ele: any) => (
         ele.name.toLowerCase().startsWith(search) ? (
-          // extract the onClick function into script part of component
-          <Card key={ele.id} onClick={() => {
-
-            const redirect = `/UserPanel/${ele.id}`
-
-            navigate(redirect);
-
-          }} className="usersCard"
+          <Card key={ele.id} onClick={() => { handleNavigate(ele.id) }} className="usersCard"
             hoverable
-            cover={<img className="imgCard" src={ele.avatar}/>}
+            cover={<img className="imgCard" src={ele.avatar} />}
           >
             <Meta title={ele.name} description={ele.email} />
           </Card>

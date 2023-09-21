@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import { Modal, Card } from 'antd';
 import './UserModal.scss';
 
-// we prefix interface with capital I so we know it reffers to ts interface and not an actual object
-interface AdminProps {
+interface IAdminProps {
   companyName: string,
   interviewDate: string,
   phase: number,
   status: number,
   note: string,
   close: Function,
-  candidateName :string
-}
+  candidateName :string,
+
+};
 
 const tabList = [
   {
@@ -36,12 +36,7 @@ const tabList = [
   },
 ];
 
-// why would you set the correct interface as function props
-// only to override it with any in the next part of function definition?
-export const UserModal: React.FC<AdminProps> = (props: any): JSX.Element => {
-
-  // unnecessary console.log
- console.log(props)
+export const UserModal: React.FC<IAdminProps> = (props: IAdminProps): JSX.Element => {
   const [activeTabKey1, setActiveTabKey1] = useState<string>('tab1');
 
   const contentList: Record<string, React.ReactNode> = {
@@ -57,7 +52,7 @@ export const UserModal: React.FC<AdminProps> = (props: any): JSX.Element => {
   };
 
   return <>
-    <Modal open={true} onOk={props.close} onCancel={props.close}>
+    <Modal open={true} onOk={() => props.close()} onCancel={() => props.close()}>
     <Card
         className='Moda-USer'
         title={props.candidateName}

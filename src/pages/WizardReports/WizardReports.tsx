@@ -1,16 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { Progress, Row, Button, Card, Divider, Select, DatePicker, Form, Input, Col } from 'antd';
-import { Dayjs } from 'dayjs';
-import { submitInterview } from '../../modules/API'
-import './WizardReports.scss';
 import { SearchOutlined } from '@ant-design/icons';
-import { getInterview } from '../../modules/API';
+import { Button, Card, DatePicker, Divider, Form, Input, Progress, Row, Select } from 'antd';
+import { Dayjs } from 'dayjs';
+import React, { useEffect, useState } from 'react';
+import { getInterview, submitInterview } from '../../modules/API';
+import './WizardReports.scss';
 
 export const WizardReports: React.FC = () => {
     const { Meta } = Card;
-    // unused
-    const { RangePicker } = DatePicker;
-    const { TextArea } = Input;
 
     const [loading, setLoading] = useState(true);
     const [loading2, setLoading2] = useState(true);
@@ -23,17 +19,15 @@ export const WizardReports: React.FC = () => {
 
 
     useEffect(() => {
-        getInterview('candidates',sessionStorage.getItem("token"))
+        getInterview('candidates', sessionStorage.getItem("token"))
             .then(response => {
                 setCandidates(response.data);
             })
             .catch(error => {
                 console.error('Error fetching interview:', error);
             });
-    }, []);
 
-    useEffect(() => {
-        getInterview('companies',sessionStorage.getItem("token"))
+        getInterview('companies', sessionStorage.getItem("token"))
             .then(response => {
                 setCompanies(response.data);
             })
@@ -49,13 +43,6 @@ export const WizardReports: React.FC = () => {
         setSearch(e.target.value.toLowerCase())
     }
 
-    // this should go into utils folder
-    function generateRandomNumber(): number {
-        const min = 10000000;
-        const max = 99999999;
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-
     const [candidateId, setCandidateId] = useState()
     const [candidateName, setCandidateName] = useState()
     const [companyId, setCompanyId] = useState()
@@ -67,7 +54,7 @@ export const WizardReports: React.FC = () => {
 
     // this should be a builder function in a .service file
     const SEND_VALUES_CREATE_REPORT = {
-        "id": generateRandomNumber(),
+        "id": candidateId,
         "candidateId": candidateId,
         "candidateName": candidateName,
         "companyId": companyId,
@@ -80,7 +67,7 @@ export const WizardReports: React.FC = () => {
 
     const handleSubmit = async () => {
         try {
-            await submitInterview('reports', SEND_VALUES_CREATE_REPORT,sessionStorage.getItem("token"))
+            await submitInterview('reports', SEND_VALUES_CREATE_REPORT, sessionStorage.getItem("token"))
             setChangeWizardStep(4)
             setProgress(100)
         } catch (e) {
@@ -117,9 +104,9 @@ export const WizardReports: React.FC = () => {
 
         </div>
         <Row gutter={[16, 24]}>
-{/* ternary chaining is one of the easies ways to ruin your code base */}
-{/* try to think of a different approach that can produce the same result */}
-{/* but in the same time, it also should clear up what exacly is going on in thiese piece of code */}
+            {/* ternary chaining is one of the easies ways to ruin your code base */}
+            {/* try to think of a different approach that can produce the same result */}
+            {/* but in the same time, it also should clear up what exacly is going on in thiese piece of code */}
             {changeWizardStep == 1 ? candidates.map((ele: any) => (
                 ele.name.toLowerCase().startsWith(search) ? (
 

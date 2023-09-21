@@ -5,6 +5,3 @@ export const getToken = async (set:string,payload:{}) => {
         sessionStorage.setItem(set,response.data.accessToken);
       })
 }
-export const nullToken = async (set:string) => {
-        sessionStorage.setItem(set,"");
-}

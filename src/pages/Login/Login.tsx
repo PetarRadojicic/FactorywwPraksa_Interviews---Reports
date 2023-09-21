@@ -1,35 +1,32 @@
 import { Button, Row, Form, Input, Col } from 'antd';
 import { useNavigate } from "react-router-dom";
 import { loginAuth } from '../../modules/loginAuth';
-import {nullToken} from '../../modules/token'
 import './Login.scss';
 
+type FieldType = {
+    username: string;
+    password: string;
+};
+
 export const Login: React.FC = () => {
-    // unnecessary enter
     const navigate = useNavigate();
 
     const onFinish = async (values: any) => {
-        const redirect: string = await loginAuth(values.username, values.password);
-        console.log(redirect)
-        // error handling should go here non inside login function
-        navigate(redirect);
+        try {
+            const redirect: string = await loginAuth(values.username, values.password);
+            console.log(redirect)
+            navigate(redirect);
+        }
+        catch (e) {
+            console.log('Failed:', e);
+        }
     };
-
-    const onFinishFailed = (errorInfo: any) => {
-        console.log('Failed:', errorInfo);
-    };
-
-    // types and interfaces dont go inside component body
-    type FieldType = {
-        username: string;
-        password: string;
-    };
+    
     return <>
 
         {/* idendation should be 2 spaces */}
         <Form
             onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
             className='Form'
         >
 

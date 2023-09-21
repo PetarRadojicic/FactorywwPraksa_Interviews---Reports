@@ -1,13 +1,14 @@
 import { Divider, Row, Col, Button, Card } from 'antd';
 import { EyeOutlined } from '@ant-design/icons';
 import { getInterview } from '../../modules/API'
-import { trimDate } from '../../modules/trimDate'
-import { useState,useEffect } from 'react';
+import { trimDate } from '../../services/trimDate'
+import { useState, useEffect } from 'react';
 import './UserPanel.scss';
 import { useParams, } from "react-router-dom"
 import { UserModal } from '../UserModal/UserModal'
 
 export const UserPanel: React.FC = () => {
+  let { id } = useParams();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showModal, setShowModal] = useState(<></>);
@@ -19,20 +20,15 @@ export const UserPanel: React.FC = () => {
   useEffect(() => {
     // get interview, and then it does everything but getting intervies
     // very very bad practice
-    getInterview('candidates',sessionStorage.getItem("token"))
+    getInterview('candidates', sessionStorage.getItem("token"))
       .then(response => {
         setCandidates(response.data);
       })
       .catch(error => {
         console.error('Error fetching interview:', error);
       });
-  }, []);
 
-  // two use effects that are triggered in same point of component lifecycle
-  // why not just put it all in one?
-
-  useEffect(() => {
-    getInterview('reports',sessionStorage.getItem("token"))
+    getInterview('reports', sessionStorage.getItem("token"))
       .then(response => {
         setReports(response.data);
       })
@@ -40,11 +36,6 @@ export const UserPanel: React.FC = () => {
         console.error('Error fetching interview:', error);
       });
   }, []);
-
-
-  // hook calls go to the top of component declaration
-  let { id } = useParams();
-
 
   const closeModal = () => {
     setIsModalOpen(false)
@@ -60,8 +51,8 @@ export const UserPanel: React.FC = () => {
     </Row>
     <Divider></Divider>
 
-  {/* This is misleading, you map users, but you just take one user */}
-  {/* You should use .find() for that, but you should also move that out to .service file */}
+    {/* This is misleading, you map users, but you just take one user */}
+    {/* You should use .find() for that, but you should also move that out to .service file */}
     {candidates.map((ele: any) => (
       ele.id == id ? (
         <>
@@ -112,9 +103,8 @@ export const UserPanel: React.FC = () => {
             </Col>
             <Col span={2}>
               <Button className="User-modal-button-wrapper" onClick={() => {
-                // you could just use setIsModalOpen(!isModalOpen)
-                { isModalOpen ? setIsModalOpen(false) : setIsModalOpen(true) }
-                setShowModal(<UserModal companyName={ele.companyName} interviewDate={trimDate(ele.interviewDate)} phase={ele.phase} status={ele.status} note={ele.note} close={closeModal} candidateName={ele.candidateName}/>)
+                {setIsModalOpen(!isModalOpen)}
+                setShowModal(<UserModal companyName={ele.companyName} interviewDate={trimDate(ele.interviewDate)} phase={ele.phase} status={ele.status} note={ele.note} close={closeModal} candidateName={ele.candidateName} />)
               }}><EyeOutlined /></Button>
             </Col>
           </Row>
