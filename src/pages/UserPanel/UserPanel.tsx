@@ -5,7 +5,7 @@ import { trimDate } from '../../services/trimDate'
 import { useState, useEffect } from 'react';
 import '../../ScssPartials/UserPanel.scss';
 import { useParams, } from "react-router-dom"
-import { UserModal } from '../UserModal/UserModal'
+import { UserModal } from '../../components/UserModal/UserModal'
 import { findUser } from '../../services/findUser'
 
 export const UserPanel: React.FC = () => {

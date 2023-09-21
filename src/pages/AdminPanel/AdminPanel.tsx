@@ -4,7 +4,7 @@ import { SearchOutlined } from '@ant-design/icons';
 import { Divider, Input, Radio } from 'antd';
 import { ListUsers } from '../../components/ListUsers/ListUsers';
 import { deleteUserData, getUserData } from '../../utils/API';
-import { UserModal } from '../UserModal/UserModal';
+import { UserModal } from '../../components/UserModal/UserModal';
 import { WizardReports } from '../WizardReports/WizardReports';
 import { checkSearch } from '../../services/checkSearch'
 import '../../ScssPartials/AdminPanel.scss';
