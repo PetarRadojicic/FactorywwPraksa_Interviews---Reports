@@ -4,5 +4,5 @@ export const checkSearch = (name:string,input:string) => {
     }
     else {
         return false;
-    }
-}
+    };
+};

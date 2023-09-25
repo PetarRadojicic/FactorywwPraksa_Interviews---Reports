@@ -1,13 +1,14 @@
-import { Divider, Row, Col, Button, Card } from 'antd';
 import { EyeOutlined } from '@ant-design/icons';
-import { getUserData } from '../../utils/API'
-import { trimDate } from '../../services/trimDate'
-import { useState, useEffect } from 'react';
-import '../../ScssPartials/UserPanel.scss';
-import { useParams, } from "react-router-dom"
-import { UserModal } from '../../components/UserModal/UserModal'
-import { findUser } from '../../services/findUser'
+import { Button, Card, Col, Divider, Row } from 'antd';
+import { useEffect, useState } from 'react';
+import { useParams, } from "react-router-dom";
 
+import { findUser } from '../../services/findUser';
+import { trimDate } from '../../services/trimDate';
+import { getUserData } from '../../utils/API';
+import { UserModal } from '../../components/UserModal/UserModal';
+
+import '../../ScssPartials/UserPanel.scss';
 export const UserPanel: React.FC = () => {
   let { id } = useParams();
 

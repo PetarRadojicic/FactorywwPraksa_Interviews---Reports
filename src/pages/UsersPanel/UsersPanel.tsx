@@ -1,7 +1,8 @@
 import { Input, Divider, Row, Card, Col } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
-import { getUserData } from '../../utils/API';
 import { useState, useEffect } from 'react';
+
+import { getUserData } from '../../utils/API';
 import { useNavigate } from "react-router-dom";
 import { checkSearch } from '../../services/checkSearch';
 import '../../ScssPartials/UsersPanel.scss';
@@ -9,13 +10,12 @@ import '../../ScssPartials/UsersPanel.scss';
 const { Meta } = Card;
 
 export const UsersPanel: React.FC = () => {
-
   const navigate = useNavigate();
 
   const [search, setSearch] = useState('');
-  const searchSurname = (e: any) => {
+  const searchSurname = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value.toLowerCase())
-  }
+  };
 
   const [candidates, setCandidates] = useState([]);
 
@@ -32,7 +32,7 @@ export const UsersPanel: React.FC = () => {
   const handleNavigate = (id: any) => {
     const redirect = `/UserPanel/${id}`
     navigate(redirect);
-  }
+  };
 
   return <div className='users-panel-wrapper'>
     <Row justify="start" >

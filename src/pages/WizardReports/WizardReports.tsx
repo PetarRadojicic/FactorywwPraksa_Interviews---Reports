@@ -1,54 +1,65 @@
+import React, { useEffect, useState } from 'react';
 import { SearchOutlined } from '@ant-design/icons';
 import { Button, Card, DatePicker, Divider, Form, Input, Progress, Row, Select } from 'antd';
 import { Dayjs } from 'dayjs';
-import React, { useEffect, useState } from 'react';
+
+import { userBuilder } from '../../services/userBuilder';
 import { getUserData, submitUserData } from '../../utils/API';
 import '../../ScssPartials/WizardReports.scss';
-import { userBuilder } from '../../services/userBuilder';
 
+interface Candidate {
+    id: number;
+    name: string;
+    email: string;
+    avatar: string;
+};
 
 export const WizardReports: React.FC = () => {
     const { Meta } = Card;
 
-    const [loading, setLoading] = useState(true);
-    const [loading2, setLoading2] = useState(true);
+    const [loadingPlaceholder, setLoadingPlaceholder] = useState(true);
+    const [loadingPlaceholder2, setLoadingPlaceholder2] = useState(true);
     const [progress, setProgress] = useState(0);
     const [title, setTitle] = useState("Select Candidate");
+    const [changeWizardStep, setChangeWizardStep] = useState(1);
+    const [search, setSearch] = useState('');
 
-    const [candidateId, setCandidateId] = useState()
-    const [candidateName, setCandidateName] = useState()
-    const [companyId, setCompanyId] = useState()
-    const [companyName, setCompanyName] = useState()
+    const [candidateId, setCandidateId] = useState(0)
+    const [candidateName, setCandidateName] = useState('')
+    const [companyId, setCompanyId] = useState(0)
+    const [companyName, setCompanyName] = useState('')
     const [interviewDate, setInterviewDate] = useState<Dayjs | null>(null);
     const [phase, setPhase] = useState('');
     const [status, setStatus] = useState('');
     const [note, setNote] = useState('');
-
     const [candidates, setCandidates] = useState([]);
     const [companies, setCompanies] = useState([]);
 
-    useEffect(() => {
-        getUserData('candidates', sessionStorage.getItem("token"))
-            .then(response => {
-                setCandidates(response.data);
-            })
-            .catch(error => {
-                console.error('Error fetching interview:', error);
-            });
 
-        getUserData('companies', sessionStorage.getItem("token"))
-            .then(response => {
-                setCompanies(response.data);
-            })
-            .catch(error => {
-                console.error('Error fetching interview:', error);
-            });
+    useEffect(() => {
+        const token = sessionStorage.getItem("token");
+        if (token) {
+            getUserData('candidates', token)
+                .then(response => {
+                    setCandidates(response.data);
+                })
+                .catch(error => {
+                    console.error('Error fetching interview:', error);
+                });
+
+            getUserData('companies', token)
+                .then(response => {
+                    setCompanies(response.data);
+                })
+                .catch(error => {
+                    console.error('Error fetching interview:', error);
+                });
+        } else {
+            alert('Token not found');
+        }
     }, []);
 
-    const [changeWizardStep, setChangeWizardStep] = useState(1);
-
-    const [search, setSearch] = useState('');
-    const searchSurname = (e: any) => {
+    const searchSurname = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearch(e.target.value.toLowerCase())
     };
 
@@ -58,24 +69,20 @@ export const WizardReports: React.FC = () => {
             setChangeWizardStep(4)
             setProgress(100)
         } catch (e) {
-
             alert(e)
-
         }
     };
 
     const renderStep1 = () => {
-        return candidates.map((ele: any) => (
+        return candidates.map((ele: Candidate) => (
             ele.name.toLowerCase().startsWith(search) ? (
-
                 <Card key={ele.id} onClick={() => {
-                    setLoading(false)
+                    setLoadingPlaceholder(false)
                     setCandidateName(ele.name)
                     setProgress(33)
                     setChangeWizardStep(2)
                     setTitle('SelectCandidate')
                     setCandidateId(ele.id)
-
                 }} className="users-panel-card"
                     hoverable
                     cover={<img src={ele.avatar} />}
@@ -84,14 +91,13 @@ export const WizardReports: React.FC = () => {
                 </Card>
             ) : null
         ))
-    }
+    };
 
     const renderStep2 = () => {
-        return companies.map((ele: any) => (
+        return companies.map((ele: Candidate) => (
             ele.name.toLowerCase().startsWith(search) ? (
-
                 <Card key={ele.id} onClick={() => {
-                    setLoading2(false)
+                    setLoadingPlaceholder2(false)
                     setCompanyName(ele.name)
                     setProgress(66)
                     setChangeWizardStep(3)
@@ -135,16 +141,15 @@ export const WizardReports: React.FC = () => {
                     <Divider></Divider>
                     <Button className="button-submit" onClick={handleSubmit}>Submit</Button>
                 </Form>
-
             </>
         )
-    }
+    };
 
     const renderStep4 = () => {
         return (
             <Button href='/AdminPanel' className='button-back'>GoBack</Button>
         )
-    }
+    };
 
     return <>
         <div className='search-input-container'>
@@ -156,13 +161,13 @@ export const WizardReports: React.FC = () => {
         <Divider><h1>{title}</h1></Divider>
 
         <div className='selected-container'>
-            <Card loading={loading} className='selected'>
+            <Card loading={loadingPlaceholder} className='selected'>
                 <Meta
                     title="Candidate"
                     description={candidateName}
                 />
             </Card>
-            <Card loading={loading2} className='selected'>
+            <Card loading={loadingPlaceholder2} className='selected'>
                 <Meta
                     title="company"
                     description={companyName}
@@ -177,4 +182,4 @@ export const WizardReports: React.FC = () => {
                         changeWizardStep === 4 ? renderStep4() : null}
         </Row>
     </>;
-}
+};

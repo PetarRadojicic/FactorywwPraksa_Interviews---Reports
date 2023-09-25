@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-
 import { SearchOutlined } from '@ant-design/icons';
 import { Divider, Input, Radio } from 'antd';
+
 import { ListUsers } from '../../components/ListUsers/ListUsers';
 import { deleteUserData, getUserData } from '../../utils/API';
 import { UserModal } from '../../components/UserModal/UserModal';

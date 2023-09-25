@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Modal, Card } from 'antd';
+
 import '../../ScssPartials/UserModal.scss';
 
 interface IAdminProps {

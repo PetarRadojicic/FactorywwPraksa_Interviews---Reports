@@ -1,7 +1,6 @@
-import react, { useState } from 'react';
-
 import { CloseOutlined, EyeOutlined } from '@ant-design/icons';
 import { Button, Card, Col, Row } from 'antd';
+
 import '../../ScssPartials/ListUsers.scss';
 
 interface IModalValues {

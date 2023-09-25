@@ -17,4 +17,4 @@ export const Router = () => {
             </Routes>
         </BrowserRouter>
     </>
-}
+};

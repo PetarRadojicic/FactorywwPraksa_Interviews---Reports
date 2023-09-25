@@ -1,4 +1,5 @@
 import bcrypt from 'bcryptjs';
+
 import { getUserData } from './API';
 import { getToken } from './token';
 
@@ -30,5 +31,5 @@ export const loginAuth = async (username: string, password: string) => {
     } else {
         alert('User doesnt exist')
         return "";
-    }
-}
+    };
+};
