@@ -99,28 +99,6 @@
   ],
   "reports": [
     {
-      "id": 16583844,
-      "candidateId": 56479186,
-      "candidateName": "Declan Schaden",
-      "companyId": 8458231,
-      "companyName": "Facebook",
-      "interviewDate": "Sun Aug 29 2021 07:53:06 GMT+0200 (Central European Summer Time)",
-      "phase": "hr",
-      "status": "declined",
-      "note": "Eveniet rerum magnam accusantium veniam eligendi recusandae et. Molestiae voluptatum enim neque quia. Dolores aperiam quia consequatur ut similique. Natus accusamus qui qui cum. Vero et consequatur provident molestiae dolores. Itaque nesciunt sint tenetur sed rerum aut est consequatur aliquid."
-    },
-    {
-      "id": 16583845,
-      "candidateId": 56479186,
-      "candidateName": "Declan Schaden",
-      "companyId": 8458231,
-      "companyName": "Facebook",
-      "interviewDate": "Sun Aug 29 2021 07:53:06 GMT+0200 (Central European Summer Time)",
-      "phase": "cv",
-      "status": "passed",
-      "note": "Vivamus a dolor non augue dapibus molestie sed et tortor. Phasellus eu tellus et enim vehicula semper quis sit amet justo. Nunc dictum malesuada ligula sit amet facilisis. "
-    },
-    {
       "id": 31297835,
       "candidateId": 54493806,
       "candidateName": "Tiffany Lynch",
@@ -651,6 +629,16 @@
       "id": 314236,
       "candidateId": 84705028,
       "candidateName": "Cade Hammes",
+      "companyId": 8458231,
+      "companyName": "Facebook",
+      "phase": "",
+      "status": "",
+      "note": ""
+    },
+    {
+      "id": 385,
+      "candidateId": 54493806,
+      "candidateName": "Tiffany Lynch",
       "companyId": 8458231,
       "companyName": "Facebook",
       "phase": "",

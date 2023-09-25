@@ -12,6 +12,7 @@ import '../../ScssPartials/UserPanel.scss';
 export const UserPanel: React.FC = () => {
   let { id } = useParams();
 
+  //bad practice leaving jsx in state,but in this case its the only way to make it work
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showModal, setShowModal] = useState(<></>);
   const { Meta } = Card;
