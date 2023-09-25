@@ -1,22 +1,22 @@
 @import 'colors';
 
-.adminPanelCard {
+.admin-panel-card {
   width: 250px;
   margin: auto;
 }
 
-.adminPanelSearchInput {
+.admin-panel-search-input {
   width: 55%;
   margin-bottom: 5%;
 }
 
-.adminPanelWrapper {
+.admin-panel-wrapper {
   background-color: $primary-color;
   color: $light-color;
   margin: 5%;
 }
 
-.adminPanelDivider {
+.admin-panel-divider {
   color: $light-color;
 }
 
@@ -24,21 +24,21 @@
   color: $light-color;
 }
 
-.adminPanelUsersWrapper {
+.admin-panel-users-wrapper {
   margin: 2%;
 }
 
-.adminPanelButtonWrapper {
+.admin-panel-button-wrapper {
   height: auto;
   display: flex;
   flex-wrap: nowrap;
 }
 
-.adminPanelButtonWrapper .anticon {
+.admin-panel-button-wrapper .anticon {
   color: $dark-color;
 }
 
-.adminPanelReportCard {
+.admin-panel-report-card {
   display: flex;
   flex-wrap: wrap;
   height: auto;
@@ -46,7 +46,7 @@
   margin: 5%;
 }
 
-.adminPanelReportWrapper {
+.admin-panel-report-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -56,7 +56,7 @@
   margin: 5%;
 }
 
-.adminPanelControlCard {
+.admin-panel-control-card {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -66,12 +66,12 @@
   margin: 5%;
 }
 
-.adminPanelControlImg {
+.admin-panel-control-img {
   width: 100%;
   height: 300px;
 }
 
-.adminPanelButtonWrapper .anticon {
+.admin-panel-button-wrapper .anticon {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -79,38 +79,38 @@
   color: $dark-color;
 }
 
-.adminPanelButton {
+.admin-panel-button {
   width: 100%;
   height: 100;
 }
 
-.adminPanelUserInfoContainer {
+.admin-panel-user-info-container {
   width: 100%;
   height: 100%;
 }
 
 @media (max-width: 768px) {
-  .adminPanelReportCard .adminPanelImg {
+  .admin-panel-report-card .admin-panel-img {
     width: auto;
     height: auto;
   }
 }
 
-.adminPanelSingle {
+.admin-panel-single {
   height: 100%;
   width: 100%;
 }
 
-.adminPanelView {
+.admin-panel-view {
   width: 50%;
 }
 
-.adminPanelViewContainer {
+.admin-panel-view-container {
   display: flex;
   width: 100%;
 }
 
-.adminPanelSearchContainer {
+.admin-panel-search-container {
   display: flex;
   justify-content: center;
   align-content: center;

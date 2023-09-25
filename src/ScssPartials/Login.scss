@@ -1,6 +1,6 @@
 @import 'colors';
 
-.loginForm {
+.login-form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,38 +8,38 @@
   height: 100vh;
 }
 
-.loginFormFiller {
+.login-form-filler {
   height: 40vh;
   background-color: $primary-color;
 }
 
-.loginFormContent {
+.login-form-content {
   height: 20vh;
 }
 
-.loginFormRowInput {
+.login-form-row-input {
   width: 100%;
   background-color: $secondary-color;
 }
 
-.loginFormRowInputUsername {
+.login-form-row-input-username {
   padding-top: 2vh;
 }
 
-.loginFormRowInputPassword {
+.login-form-row-input-password {
   padding-bottom: 2vh;
 }
 
-.loginFormRowInputButton {
+.login-form-row-input-button {
   width: 100%;
 }
 
-.loginFormLabel {
+.login-form-label {
   color: $light-color;
   font-size: larger;
 }
 
-.loginFormSubmit {
+.login-form-submit {
   height: 25%;
   font-size: x-large;
   background-color: $primary-color;

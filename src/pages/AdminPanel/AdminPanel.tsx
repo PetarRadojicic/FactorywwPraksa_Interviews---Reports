@@ -21,11 +21,11 @@ interface IUserValues {
 }
 
 export const AdminPanel: React.FC = () => {
-  const [mode, setmode] = useState('Reports');
+  const [mode, setMode] = useState('Reports');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [reportsValueModal, setReportsValueModal] = useState({} as IUserValues);
   const [reports, setReports] = useState([]);
-  const [Reload, setReload] = useState(1);
+  const [reload, setReload] = useState(1);
   const [search, setSearch] = useState('');
 
   const searchSurname = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,11 +44,11 @@ export const AdminPanel: React.FC = () => {
       .catch((error) => {
         console.error('Error fetching interview:', error);
       });
-  }, [Reload]);
+  }, [reload]);
 
   const onDelete = async (values: any) => {
     deleteReport(values);
-    setReload(Reload + 1);
+    setReload(reload + 1);
   };
 
   const deleteReport = async (id: any) => {
@@ -81,26 +81,26 @@ export const AdminPanel: React.FC = () => {
           candidateName={reportsValueModal.candidateName}
         />
       )}
-      <Divider orientation="center" className="adminPanelDivider">
+      <Divider orientation="center" className="admin-panel-divider">
         <h1>Reports Administration</h1>
         <Radio.Group
-          className="adminPanelViewContainer"
+          className="admin-panel-view-container"
           value={mode}
-          onChange={(e) => setmode(e.target.value)}
+          onChange={(e) => setMode(e.target.value)}
         >
-          <Radio.Button className="adminPanelView" value={'Reports'}>
+          <Radio.Button className="admin-panel-view" value={'Reports'}>
             Reports
           </Radio.Button>
-          <Radio.Button className="adminPanelView" value={'Create Report'}>
+          <Radio.Button className="admin-panel-view" value={'Create Report'}>
             Create Report
           </Radio.Button>
         </Radio.Group>
       </Divider>
       {mode === 'Reports' && (
-        <div className="adminPanelSearchContainer">
+        <div className="admin-panel-search-container">
           <Input
             onChange={searchSurname}
-            className="adminPanelSearchInput"
+            className="admin-panel-search-input"
             addonBefore={<SearchOutlined />}
             placeholder="Search"
           />

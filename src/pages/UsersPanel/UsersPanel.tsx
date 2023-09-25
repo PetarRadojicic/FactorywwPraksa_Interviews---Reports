@@ -44,7 +44,7 @@ export const UsersPanel: React.FC = () => {
     <Divider></Divider>
     <Row gutter={[16, 24]}>
       {candidates.map((ele: any) => (
-        checkSearch(ele.name,search) ? (
+        checkSearch(ele.name, search) ? (
           <Card key={ele.id} onClick={() => { handleNavigate(ele.id) }} className="users-panel-card"
             hoverable
             cover={<img className="users-panel-img" src={ele.avatar} />}

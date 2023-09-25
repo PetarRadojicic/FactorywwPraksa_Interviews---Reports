@@ -1,98 +1,97 @@
 @import 'colors';
 
 .percent {
-    display: flex;
-    width: 90%;
-    margin: 5%;
-    background-color: $light-color;
-    border-radius: 25px;
-    padding: 1%;
+  display: flex;
+  width: 90%;
+  margin: 5%;
+  background-color: $light-color;
+  border-radius: 25px;
+  padding: 1%;
 }
 
-.step2UsersCard {
-    display: flex;
-    width: 90%;
-    margin-left: 5%;
-    margin-right: 5%;
-    margin-bottom: 1%;
-
+.step-2-users-card {
+  display: flex;
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-bottom: 1%;
 }
 
-.inputWrapperReport {
-    display: flex;
-    width: 90%;
-    margin-left: 5%;
-    margin-right: 5%;
-    margin-bottom: 5%;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
+.input-wrapper-report {
+  display: flex;
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-bottom: 5%;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
-.inputWrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1%;
-    width: 100%;
+.input-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1%;
+  width: 100%;
 }
 
 .inputs {
-    padding: 1%;
-    width: 100%;
+  padding: 1%;
+  width: 100%;
 }
 
-.buttonSubmit {
-    height: 50px;
-    width: 50%;
-    padding: 1%;
+.button-submit {
+  height: 50px;
+  width: 50%;
+  padding: 1%;
 }
 
-.buttonBack {
-    display: flex;
-    width: 90%;
-    margin-left: 5%;
-    margin-right: 5%;
-    margin-right: 5%;
-    margin-bottom: 5%;
-    justify-content: center;
-    flex-wrap: wrap;
+.button-back {
+  display: flex;
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-right: 5%;
+  margin-bottom: 5%;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
-.InputWrapperReport {
-    background-color: $primary-color;
-    padding: 5%;
+.input-wrapper-report {
+  background-color: $primary-color;
+  padding: 5%;
 }
 
-.usersPanelCard {
-    width: 250px;
-    height: 500px;
-    margin: auto;
+.users-panel-card {
+  width: 250px;
+  height: 500px;
+  margin: auto;
 }
 
-.searchInput {
-    width: 55%;
-    margin-bottom: 5%;
+.search-input {
+  width: 55%;
+  margin-bottom: 5%;
 }
 
-.searchInputContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+.search-input-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
-.selectedContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+.selected-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .selected {
-    width: 80%;
-    margin-left: 5%;
-    margin-right: 5%;
-    margin-top: 2%;
-    margin-bottom: 2%;
+  width: 80%;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 2%;
+  margin-bottom: 2%;
 }

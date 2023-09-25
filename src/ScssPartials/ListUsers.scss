@@ -1,16 +1,16 @@
 @import 'colors';
 
-.listCard {
+.list-card {
   height: 100%;
   width: 100%;
 }
 
-.listModalButtonWrapper .anticon {
+.list-modal-button-wrapper .anticon {
   font-size: xx-large;
   color: $dark-color;
 }
 
-.listModalButtonWrapper {
+.list-modal-button-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,7 +18,7 @@
   width: 100%;
 }
 
-.listPanelwrraper {
+.list-panel-wrapper {
   justify-content: center;
   align-items: center;
   text-align: center;

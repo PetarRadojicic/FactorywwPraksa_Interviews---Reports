@@ -54,13 +54,13 @@ export const UserModal: React.FC<IAdminProps> = (props: IAdminProps): JSX.Elemen
   return <>
     <Modal open={true} onOk={() => props.close()} onCancel={() => props.close()}>
       <Card
-        className='userModalCard'
+        className='user-modal-card'
         title={props.candidateName}
         tabList={tabList}
         activeTabKey={activeTabKey1}
         onTabChange={onTab1Change}
         tabBarExtraContent={<span></span>}
-        tabProps={{ className: 'userModalTab' }}
+        tabProps={{ className: 'user-modal-tab' }}
       >
         {contentList[activeTabKey1]}
       </Card>

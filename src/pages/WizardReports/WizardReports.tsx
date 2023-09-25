@@ -13,7 +13,7 @@ export const WizardReports: React.FC = () => {
     const [loading, setLoading] = useState(true);
     const [loading2, setLoading2] = useState(true);
     const [progress, setProgress] = useState(0);
-    const [Title, setTitle] = useState("Select Candidate");
+    const [title, setTitle] = useState("Select Candidate");
 
     const [candidateId, setCandidateId] = useState()
     const [candidateName, setCandidateName] = useState()
@@ -54,7 +54,7 @@ export const WizardReports: React.FC = () => {
 
     const handleSubmit = async () => {
         try {
-            await submitUserData('reports', userBuilder(candidateId, candidateName, companyId, companyName,interviewDate,phase,status,note ), sessionStorage.getItem("token"))
+            await submitUserData('reports', userBuilder(candidateId, candidateName, companyId, companyName, interviewDate, phase, status, note), sessionStorage.getItem("token"))
             setChangeWizardStep(4)
             setProgress(100)
         } catch (e) {
@@ -76,7 +76,7 @@ export const WizardReports: React.FC = () => {
                     setTitle('SelectCandidate')
                     setCandidateId(ele.id)
 
-                }} className="usersPanelCard"
+                }} className="users-panel-card"
                     hoverable
                     cover={<img src={ele.avatar} />}
                 >
@@ -97,7 +97,7 @@ export const WizardReports: React.FC = () => {
                     setChangeWizardStep(3)
                     setTitle('Fill Report Detail')
                     setCompanyId(ele.id)
-                }} className="step2UsersCard"
+                }} className="step-2-users-card"
                     hoverable
                 >
                     <Meta title={ele.name} />
@@ -109,8 +109,8 @@ export const WizardReports: React.FC = () => {
     const renderStep3 = () => {
         return (
             <>
-                <Form className="inputWrapperReport">
-                    <Form.Item label="InterView Date" className="inputWrapper">
+                <Form className="input-wrapper-report">
+                    <Form.Item label="InterView Date" className="input-wrapper">
                         <DatePicker className="inputs" onChange={date => setInterviewDate(date)} />
                     </Form.Item>
                     <Divider></Divider>
@@ -133,7 +133,7 @@ export const WizardReports: React.FC = () => {
                         <Input.TextArea rows={4} onChange={e => setNote(e.target.value)} />
                     </Form.Item>
                     <Divider></Divider>
-                    <Button className="buttonSubmit" onClick={handleSubmit}>Submit</Button>
+                    <Button className="button-submit" onClick={handleSubmit}>Submit</Button>
                 </Form>
 
             </>
@@ -142,20 +142,20 @@ export const WizardReports: React.FC = () => {
 
     const renderStep4 = () => {
         return (
-            <Button href='/AdminPanel' className='buttonBack'>GoBack</Button>
+            <Button href='/AdminPanel' className='button-back'>GoBack</Button>
         )
     }
 
     return <>
-        <div className='searchInputContainer'>
-            <Input onChange={searchSurname} className="searchInput" addonBefore={<SearchOutlined />} placeholder="Search" />
+        <div className='search-input-container'>
+            <Input onChange={searchSurname} className="search-input" addonBefore={<SearchOutlined />} placeholder="Search" />
         </div>
         <div className='percent'>
             <Progress percent={progress} />
         </div>
-        <Divider><h1>{Title}</h1></Divider>
+        <Divider><h1>{title}</h1></Divider>
 
-        <div className='selectedContainer'>
+        <div className='selected-container'>
             <Card loading={loading} className='selected'>
                 <Meta
                     title="Candidate"
