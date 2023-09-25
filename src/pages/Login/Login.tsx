@@ -12,7 +12,7 @@ type FieldType = {
 export const Login: React.FC = () => {
   const navigate = useNavigate();
 
-  const onFinish = async (values: any) => {
+  const onFinish = async (values: FieldType) => {
     try {
       const redirect: string = await loginAuth(values.username, values.password);
       navigate(redirect);
