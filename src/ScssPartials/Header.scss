@@ -1,9 +1,11 @@
-.header{
+@import '../assets/colors';
+
+.header {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     text-align: center;
-    color: white;
-    background-color: #888;
+    color: $light-color;
+    background-color: $secondary-color;
 }
